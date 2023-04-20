@@ -1,2 +1,3 @@
 # Yarnify
-Whatcom Community College Capstone Project Java App
+Whatcom Community College Capstone Project
+Android Java App
