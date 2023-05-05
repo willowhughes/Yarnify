@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.yarnify'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.yarnify"
@@ -29,7 +29,13 @@ android {
 }
 
 dependencies {
+    //Dependencies for Room Database
+    def room_version = "2.5.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 
+    //Default dependencies created automatically on app creation
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
