@@ -9,7 +9,10 @@ import androidx.room.PrimaryKey;
 public class UserModel {
 
     //TABLE COLUMNS
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private long mId;
+
     @NonNull
     @ColumnInfo(name = "username")
     private String mUsername;
@@ -28,6 +31,13 @@ public class UserModel {
     }
 
     //GETTERS AND SETTERS
+    public long getId() {
+        return mId;
+    }
+    public void setId(long id) {
+        this.mId = id;
+    }
+
     public String getUsername() {
         return mUsername;
     }
