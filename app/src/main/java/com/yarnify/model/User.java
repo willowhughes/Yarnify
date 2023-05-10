@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class UserModel {
+public class User {
 
     //TABLE COLUMNS
     @PrimaryKey(autoGenerate = true)
@@ -24,7 +24,7 @@ public class UserModel {
     private String mRavelryUsername;
 
     //CONSTRUCTOR
-    public UserModel(@NonNull String username, String ravelryUsername){
+    public User(@NonNull String username, String ravelryUsername){
         mUsername = username;
         mRavelryUsername = ravelryUsername;
         mUpdateTime = System.currentTimeMillis();

@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class YarnModel {
+public class Yarn {
 
     //TABLE COLUMNS
     @PrimaryKey(autoGenerate = true)
@@ -49,9 +49,9 @@ public class YarnModel {
     private String mDyeLot;
 
     //CONSTRUCTOR
-    public YarnModel(@NonNull String name, String yarnWeight, String lengthUnits,
-                     int totalLength, String weightUnits, int totalWeight, String colorFamily,
-                     String colorway, String dyeLot) {
+    public Yarn(@NonNull String name, String yarnWeight, String lengthUnits,
+                int totalLength, String weightUnits, int totalWeight, String colorFamily,
+                String colorway, String dyeLot) {
         this.mName = name;
         this.mYarnWeight = yarnWeight;
         this.mLengthUnits = lengthUnits;

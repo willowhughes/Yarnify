@@ -2,11 +2,11 @@ package com.yarnify.repo;
 
 import androidx.room.RoomDatabase;
 
-import com.yarnify.model.NeedleModel;
-import com.yarnify.model.UserModel;
-import com.yarnify.model.YarnModel;
+import com.yarnify.model.Needle;
+import com.yarnify.model.User;
+import com.yarnify.model.Yarn;
 
-@androidx.room.Database( entities = { UserModel.class, YarnModel.class, NeedleModel.class }, version = 1,
+@androidx.room.Database( entities = { User.class, Yarn.class, Needle.class }, version = 1,
         exportSchema = false )
 abstract class LocalDatabase extends RoomDatabase {
 

@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class NeedleModel {
+public class Needle {
 
     //TABLE COLUMNS
     @PrimaryKey(autoGenerate = true)
@@ -54,8 +54,8 @@ public class NeedleModel {
     private int mQty;
 
     //CONSTRUCTOR
-    public NeedleModel(@NonNull String type, String craft, int metric, boolean isHook,
-                       String us, int length, String brand, String material, int qty){
+    public Needle(@NonNull String type, String craft, int metric, boolean isHook,
+                  String us, int length, String brand, String material, int qty){
         mType = type;
         mCraft = craft;
         mMetric = metric;

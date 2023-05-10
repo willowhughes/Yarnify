@@ -2,7 +2,10 @@ package com.yarnify.repo;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Room;
+
+import com.yarnify.model.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -33,5 +36,25 @@ public class Repository {
         mYarnDAO = database.yarnDAO();
         mNeedleDAO = database.needleDAO();
     }
+
+    //User Table: addUser, getUser, updateUser
+    public void addUser(User user){
+        mDatabaseExecutor.execute(() -> {
+            long userId = mUserDAO.addUser(user);
+            user.setId(userId);
+        });
+    }
+
+    public LiveData<User> getUser(long userId){
+        return mUserDAO.getUser(userId);
+    }
+
+    public void updateUser(User user){
+        mDatabaseExecutor.execute(() -> {
+            mUserDAO.updateUser(user);
+        });
+    }
+    //TODO: METHODS TO ACCESS THE DATA THROUGH DAOS GO HERE
+
 
 }
