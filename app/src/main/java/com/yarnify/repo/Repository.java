@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
+import com.yarnify.model.Needle;
 import com.yarnify.model.User;
 import com.yarnify.model.Yarn;
 
@@ -89,6 +90,40 @@ public class Repository {
     public void deleteYarn(long id) {
         mDatabaseExecutor.execute(() -> {
             mYarnDAO.deleteYarn(id);
+        });
+    }
+
+    //Needle Table: getNeedle, getNeedles, addNeedle, updateNeedle deleteNeedle
+    //TODO: getYarnsOrderBy(String orderChoice)
+    public LiveData<Needle> getNeedle(long needleId) {
+        return mNeedleDAO.getNeedle(needleId);
+    }
+
+    public LiveData<List<Needle>> getNeedles() {
+        return mNeedleDAO.getNeedles();
+    }
+
+    public void addNeedle(Needle needle) {
+        mDatabaseExecutor.execute(() -> {
+            mNeedleDAO.addNeedle(needle);
+        });
+    }
+
+    public void updateNeedle(Needle needle) {
+        mDatabaseExecutor.execute(() -> {
+            mNeedleDAO.updateNeedle(needle);
+        });
+    }
+
+    public void deleteNeedle(Needle needle) {
+        mDatabaseExecutor.execute(() -> {
+            mNeedleDAO.deleteNeedle(needle);
+        });
+    }
+
+    public void deleteNeedle(long id) {
+        mDatabaseExecutor.execute(() -> {
+            mNeedleDAO.deleteNeedle(id);
         });
     }
 }
