@@ -25,24 +25,30 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<patternObject> exampleList = new ArrayList<>(); //array of pattern objects
-
+    //binding is an instance of the auto-generated FragmentHomeBinding class, which is used to bind the layout XML elements to their corresponding Java objects.
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        // create an instance of HomeViewModel to use in this fragment
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
+        // Inflate the layout for this fragment using the FragmentHomeBinding
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //clear the exampleList before adding new pattern objects
+        exampleList.clear();
         //hardcoded example pattern objects
         exampleList.add(new patternObject(R.drawable.ravelry_sample_photo, "gloves", "Susan"));
         exampleList.add(new patternObject(R.drawable.armillafirm_small2, "thin sweater", "Jack"));
         exampleList.add(new patternObject(R.drawable.beanies_medium2, "beanies", "Bob"));
+
         setUpRecyclerView(); //method initializes and sets the recyclerview, adapter, and layout manager
 
-        return root;
+        return root; // Return the root view created by inflating the FragmentHomeBinding
     }
 
     @Override
