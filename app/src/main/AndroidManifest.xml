@@ -12,6 +12,10 @@
         android:theme="@style/Theme.Yarnify"
         tools:targetApi="31">
         <activity
+            android:name=".patternPage"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:exported="true"
