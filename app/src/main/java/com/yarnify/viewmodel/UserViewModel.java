@@ -17,6 +17,7 @@ public class UserViewModel extends AndroidViewModel {
         repository = Repository.getInstance(application.getApplicationContext());
     }
 
+    //add, get, update user
     public void addUser(User user) {
        repository.addUser(user);
     }
