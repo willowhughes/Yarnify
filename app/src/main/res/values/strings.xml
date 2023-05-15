@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Yarnify</string>
+<<<<<<< HEAD
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+=======
+>>>>>>> 5a893ab9dfc3ed0b4ba7dc0f7bb848a2c542cab0
 </resources>
