@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +18,8 @@ public class patternPage extends AppCompatActivity {
 
     public ImageView image;
     public TextView text1, text2;
+    public Button saveButton;
+    public boolean isSaved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class patternPage extends AppCompatActivity {
         image = findViewById(R.id.patternImage);
         text1 = findViewById(R.id.patternName);
         text2 = findViewById(R.id.patternCreator);
+        saveButton = findViewById(R.id.saveButton);
+        isSaved = false; //todo implement checking device for whether current pattern is saved already
 
         Intent intent = getIntent(); //grabs intent from parent
         patternObject pat = intent.getParcelableExtra("clicked_item"); //grabs parceled patternObject that was clicked on to use in this class
@@ -36,6 +42,15 @@ public class patternPage extends AppCompatActivity {
 
         //sets a action bar with a back button that returns the user to the parent activity(main activity)
         setBackButton();
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveButton.setText("Saved");
+                isSaved = true;
+                //todo implement saving 'patternObject pat' to users device
+            }
+        });
     }
 
     public void setBackButton() {
@@ -49,4 +64,6 @@ public class patternPage extends AppCompatActivity {
         upArrow.setColorFilter(getResources().getColor(R.color.light_gray), PorterDuff.Mode.SRC_ATOP);
         actionBar.setHomeAsUpIndicator(upArrow);
     }
+
+
 }

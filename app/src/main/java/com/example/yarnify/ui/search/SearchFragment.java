@@ -10,22 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.yarnify.databinding.FragmentDashboardBinding;
+import com.example.yarnify.databinding.FragmentSearchBinding;
+import com.example.yarnify.databinding.FragmentSearchBinding;
 
 public class SearchFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentSearchBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        SearchViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(SearchViewModel.class);
-
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        textView.setText("Search Fragment");
         return root;
     }
 
