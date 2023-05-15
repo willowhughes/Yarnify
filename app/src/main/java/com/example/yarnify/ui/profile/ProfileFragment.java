@@ -19,8 +19,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        final TextView textView = binding.textNotifications;
-        textView.setText("Profile Fragment");
         return root;
     }
 
