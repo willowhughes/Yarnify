@@ -3,7 +3,6 @@ plugins {
 }
 
 android {
-<<<<<<< HEAD
     namespace 'com.example.yarnify'
     compileSdk 33
 
@@ -11,15 +10,7 @@ android {
         applicationId "com.example.yarnify"
         minSdk 24
         targetSdk 33
-=======
-    namespace 'com.yarnify'
-    compileSdk 33
 
-    defaultConfig {
-        applicationId "com.yarnify"
-        minSdk 21
-        targetSdk 32
->>>>>>> 5a893ab9dfc3ed0b4ba7dc0f7bb848a2c542cab0
         versionCode 1
         versionName "1.0"
 
@@ -36,7 +27,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-<<<<<<< HEAD
     buildFeatures {
         viewBinding true
     }
@@ -62,22 +52,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.android.volley:volley:1.2.1'
-=======
-}
-
-dependencies {
     //Dependencies for Room Database
     def room_version = "2.5.1"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
-
-    //Default dependencies created automatically on app creation
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
->>>>>>> 5a893ab9dfc3ed0b4ba7dc0f7bb848a2c542cab0
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
 }
