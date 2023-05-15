@@ -94,7 +94,6 @@ public class Repository {
     }
 
     //Needle Table: getNeedle, getNeedles, addNeedle, updateNeedle deleteNeedle
-    //TODO: getYarnsOrderBy(String orderChoice)
     public LiveData<Needle> getNeedle(long needleId) {
         return mNeedleDAO.getNeedle(needleId);
     }
