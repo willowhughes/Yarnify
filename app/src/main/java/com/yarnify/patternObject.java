@@ -1,4 +1,4 @@
-package com.example.yarnify;
+package com.yarnify;
 
 import android.os.Parcel;
 import android.os.Parcelable;

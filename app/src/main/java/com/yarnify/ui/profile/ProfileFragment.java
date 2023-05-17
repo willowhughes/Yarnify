@@ -1,4 +1,4 @@
-package com.example.yarnify.ui.profile;
+package com.yarnify.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
