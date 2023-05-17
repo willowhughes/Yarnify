@@ -1,21 +1,19 @@
-package com.example.yarnify.ui.home;
+package com.yarnify.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yarnify.R;
-import com.example.yarnify.cardAdapter;
+import com.yarnify.cardAdapter;
 import com.example.yarnify.databinding.FragmentHomeBinding;
-import com.example.yarnify.patternObject;
+import com.yarnify.patternObject;
 
 import java.util.ArrayList;
 
