@@ -1,4 +1,4 @@
-package com.example.yarnify.ui.search;
+package com.yarnify.ui.search;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

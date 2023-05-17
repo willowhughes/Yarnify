@@ -14,11 +14,11 @@
         android:theme="@style/Theme.Yarnify"
         tools:targetApi="31">
         <activity
-            android:name=".patternPage"
+            android:name="com.yarnify.patternPage"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName="com.yarnify.MainActivity"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.yarnify.MainActivity"
             android:launchMode="singleTask"
             android:exported="true"
             android:label="@string/app_name">

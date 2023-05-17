@@ -1,4 +1,4 @@
-package com.example.yarnify;
+package com.yarnify;
 
 
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.yarnify.R;
 
 import java.util.ArrayList;
 
