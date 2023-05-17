@@ -1,4 +1,4 @@
-package com.example.yarnify;
+package com.yarnify;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.yarnify.R;
 
 public class patternPage extends AppCompatActivity {
 

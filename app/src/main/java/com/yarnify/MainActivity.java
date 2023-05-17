@@ -1,7 +1,8 @@
-package com.example.yarnify;
+package com.yarnify;
 
 import android.os.Bundle;
 
+import com.example.yarnify.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
