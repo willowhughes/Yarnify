@@ -59,7 +59,7 @@ public class cardAdapter extends RecyclerView.Adapter<cardAdapter.exampleViewHol
             @Override
             public void onClick(View view) {
                 // Start a new activity and pass the clicked item as an extra
-                Intent intent = new Intent(view.getContext(), patternPage.class);
+                Intent intent = new Intent(view.getContext(), PatternPageActivity.class);
                 intent.putExtra("clicked_item", currentItem);
                 view.getContext().startActivity(intent);
             }
