@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yarnify.R;
 import com.yarnify.cardAdapter;
 import com.example.yarnify.databinding.FragmentHomeBinding;
-import com.yarnify.patternObject;
+import com.yarnify.model.Pattern;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<patternObject> exampleList = new ArrayList<>(); //array of pattern objects
+    ArrayList<Pattern> exampleList = new ArrayList<>(); //array of pattern objects
     //binding is an instance of the auto-generated FragmentHomeBinding class, which is used to bind the layout XML elements to their corresponding Java objects.
     private FragmentHomeBinding binding;
 
@@ -35,9 +35,9 @@ public class HomeFragment extends Fragment {
         //clear the exampleList before adding new pattern objects
         exampleList.clear();
         //hardcoded example pattern objects
-        exampleList.add(new patternObject(R.drawable.ravelry_sample_photo, "gloves", "Susan"));
-        exampleList.add(new patternObject(R.drawable.armillafirm_small2, "thin sweater", "Jack"));
-        exampleList.add(new patternObject(R.drawable.beanies_medium2, "beanies", "Bob"));
+        exampleList.add(new Pattern(R.drawable.ravelry_sample_photo, "gloves", "Susan"));
+        exampleList.add(new Pattern(R.drawable.armillafirm_small2, "thin sweater", "Jack"));
+        exampleList.add(new Pattern(R.drawable.beanies_medium2, "beanies", "Bob"));
 
         setUpRecyclerView(); //method initializes and sets the recyclerview, adapter, and layout manager
 

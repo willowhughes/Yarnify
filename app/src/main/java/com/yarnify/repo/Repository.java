@@ -8,6 +8,7 @@ import androidx.room.Room;
 import com.yarnify.model.Needle;
 import com.yarnify.model.User;
 import com.yarnify.model.Yarn;
+import com.yarnify.model.Pattern;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -19,6 +20,7 @@ public class Repository {
     private final UserDAO mUserDAO;
     private final YarnDAO mYarnDAO;
     private final NeedleDAO mNeedleDAO;
+    private final PatternDAO mPatternDAO;
 
     //LiveData automatically uses a thread, so the ExecutorService will be used to insert/update/delete
     private static final ExecutorService mDatabaseExecutor =
@@ -38,6 +40,7 @@ public class Repository {
         mUserDAO = database.userDAO();
         mYarnDAO = database.yarnDAO();
         mNeedleDAO = database.needleDAO();
+        mPatternDAO = database.patternDAO();
     }
 
     //User Table: addUser, getUser, updateUser
@@ -123,6 +126,39 @@ public class Repository {
     public void deleteNeedle(long id) {
         mDatabaseExecutor.execute(() -> {
             mNeedleDAO.deleteNeedle(id);
+        });
+    }
+
+    //Pattern Table: getPattern, getPatterns, addPattern, updatePattern deletePattern
+    public LiveData<Pattern> getPattern(long patternId) {
+        return mPatternDAO.getPattern(patternId);
+    }
+
+    public LiveData<List<Pattern>> getPatterns() {
+        return mPatternDAO.getPatterns();
+    }
+
+    public void addPattern(Pattern pattern) {
+        mDatabaseExecutor.execute(() -> {
+            mPatternDAO.addPattern(pattern);
+        });
+    }
+
+    public void updatePattern(Pattern pattern) {
+        mDatabaseExecutor.execute(() -> {
+            mPatternDAO.updatePattern(pattern);
+        });
+    }
+
+    public void deletePattern(Pattern pattern) {
+        mDatabaseExecutor.execute(() -> {
+            mPatternDAO.deletePattern(pattern);
+        });
+    }
+
+    public void deletePattern(long id) {
+        mDatabaseExecutor.execute(() -> {
+            mPatternDAO.deletePattern(id);
         });
     }
 }

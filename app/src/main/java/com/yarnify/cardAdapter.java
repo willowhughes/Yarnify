@@ -12,12 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yarnify.R;
+import com.yarnify.model.Pattern;
 
 import java.util.ArrayList;
 
 public class cardAdapter extends RecyclerView.Adapter<cardAdapter.exampleViewHolder> {
 
-    private ArrayList<patternObject> mExampleList; //local variable that will hold the passed in list of patternObjects
+    private ArrayList<Pattern> mExampleList; //local variable that will hold the passed in list of patternObjects
 
     public static class exampleViewHolder extends RecyclerView.ViewHolder { //contains three views  that will be displayed in the card. The constructor of this class sets the views
         public ImageView mImageView;
@@ -33,7 +34,7 @@ public class cardAdapter extends RecyclerView.Adapter<cardAdapter.exampleViewHol
     }
 
     //defines the constructor for the adapter that takes an array of patternObjects and assigns it to the mExampleList variable.
-    public cardAdapter(ArrayList<patternObject> exampleList) {
+    public cardAdapter(ArrayList<Pattern> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -49,11 +50,11 @@ public class cardAdapter extends RecyclerView.Adapter<cardAdapter.exampleViewHol
 
     @Override
     public void onBindViewHolder(@NonNull exampleViewHolder holder, int position) { //This method is called to bind the data to a specific view holder
-        patternObject currentItem = mExampleList.get(position);
+        Pattern currentItem = mExampleList.get(position);
         //sets the values of the ImageView and two TextView views in the exampleViewHolder object based on the patternObject at the position in the mExampleList array.
         holder.mImageView.setImageResource(currentItem.getImageResource());
-        holder.mTextView1.setText(currentItem.getText1());
-        holder.mTextView2.setText("by " + currentItem.getText2());
+        holder.mTextView1.setText(currentItem.getTitle());
+        holder.mTextView2.setText("by " + currentItem.getCreator());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
