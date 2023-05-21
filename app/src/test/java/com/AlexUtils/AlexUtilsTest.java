@@ -1,17 +1,12 @@
 package com.AlexUtils;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.icu.util.VersionInfo;
 
-import com.android.volley.toolbox.StringRequest;
-import com.example.yarnify.MainActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class AlexUtilsTest {
@@ -50,9 +46,7 @@ public class AlexUtilsTest {
 
         AlexUtils alexUtils = new AlexUtils(mContext);
         String expected = "This is expected";
-
         assertEquals(expected, alexUtils.jsonResponse);
-
     }
 
     @Test

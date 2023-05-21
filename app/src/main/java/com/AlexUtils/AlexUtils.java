@@ -24,7 +24,7 @@ public class AlexUtils {
 
     public StringRequest apiQueryTestMethod(){
 
-        String url = "https://run.mocky.io/v3/b89e04da-962d-494e-94f7-89dda7d1c308";
+        String url = "https://run.mocky.io/v3/077aa56d-6acf-4da2-9f08-8cb52c94f1f1";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
