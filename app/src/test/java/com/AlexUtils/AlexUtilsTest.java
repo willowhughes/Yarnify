@@ -15,7 +15,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-
+// This was testing Volley
+// Defunct now
+// Learned a lot about mocking objects here though.
+// If you run apiQueryTestMethod() the results show a runtime exception
+// at android.net.http.AndroidHttpClient.newInstance(AndroidHttpClient.java:58)
+// AndroidHttpClient is the import that I couldn't get working.
 @RunWith(MockitoJUnitRunner.class)
 public class AlexUtilsTest {
 

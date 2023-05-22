@@ -13,6 +13,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 
+
+// Abandoned Volley Test
+// this import kept failing and I couldn't get it working. Sad.
+//
+// import android.net.http.AndroidHttpClient;
+// Project View -> External Libraries -> Gradle: com.android.volley:volley -> toolbox -> Volley.class
+
+
 public class AlexUtils {
     String jsonResponse ="";
 

@@ -3,10 +3,12 @@ package com.AlexUtils.network;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+//This creates a RetrofitInstance
+//Not actually using the BASE_URL in here, it's overridden in AlexRetrofit I think.
 public class RetrofitInstance {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://run.mocky.io/v3/077aa56d-6acf-4da2-9f08-8cb52c94f1f1";
+    private static final String BASE_URL = "https://run.mocky.io/v3/";
 
 
     public static Retrofit getRetrofitInstance(){
