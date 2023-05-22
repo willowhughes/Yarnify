@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_purple"
-    tools:context="com.yarnify.patternPage">
+    tools:context="com.yarnify.PatternPageActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"

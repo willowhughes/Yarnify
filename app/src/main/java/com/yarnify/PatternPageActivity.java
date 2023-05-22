@@ -13,8 +13,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.yarnify.R;
+import com.yarnify.model.Pattern;
 
-public class patternPage extends AppCompatActivity {
+public class PatternPageActivity extends AppCompatActivity {
 
     //this activity is the display page for a pattern when it is clicked on
 
@@ -36,11 +37,11 @@ public class patternPage extends AppCompatActivity {
         isSaved = false; //todo implement checking device for whether current pattern is saved already
 
         Intent intent = getIntent(); //grabs intent from parent
-        patternObject pat = intent.getParcelableExtra("clicked_item"); //grabs parceled patternObject that was clicked on to use in this class
+        Pattern pat = intent.getParcelableExtra("clicked_item"); //grabs parceled patternObject that was clicked on to use in this class
         //sets patternObject's data to the pattern page's layout views
         image.setImageResource(pat.getImageResource());
-        text1.setText(pat.getText1());
-        text2.setText("by " + pat.getText2());
+        text1.setText(pat.getTitle());
+        text2.setText("by " + pat.getCreator());
 
         //sets a action bar with a back button that returns the user to the parent activity(main activity)
         setBackButton();

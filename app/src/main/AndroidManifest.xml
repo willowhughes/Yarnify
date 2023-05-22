@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Yarnify"
         tools:targetApi="31">
         <activity
-            android:name="com.yarnify.patternPage"
+            android:name="com.yarnify.PatternPageActivity"
             android:exported="false"
             android:parentActivityName="com.yarnify.MainActivity"/>
         <activity
