@@ -18,6 +18,10 @@
             android:exported="false"
             android:parentActivityName="com.yarnify.MainActivity"/>
         <activity
+            android:name="com.yarnify.SavedPatternsActivity"
+            android:exported="false"
+            android:parentActivityName="com.yarnify.MainActivity"/>
+        <activity
             android:name="com.yarnify.MainActivity"
             android:launchMode="singleTask"
             android:exported="true"

@@ -1,15 +1,19 @@
 package com.yarnify.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.yarnify.R;
 import com.example.yarnify.databinding.FragmentProfileBinding;
 import com.example.yarnify.databinding.FragmentProfileBinding;
+import com.yarnify.SavedPatternsActivity;
 
 public class ProfileFragment extends Fragment {
 
@@ -21,7 +25,15 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
+        Button savedPatternsButton = root.findViewById(R.id.savedPatternsButton);
+        savedPatternsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Launch the SavedPatternsActivity
+                Intent intent = new Intent(getActivity(), SavedPatternsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return root;
     }
