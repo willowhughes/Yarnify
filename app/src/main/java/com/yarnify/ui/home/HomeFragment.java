@@ -19,9 +19,6 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<Pattern> exampleList = new ArrayList<>(); //array of pattern objects
     //binding is an instance of the auto-generated FragmentHomeBinding class, which is used to bind the layout XML elements to their corresponding Java objects.
     private FragmentHomeBinding binding;
@@ -35,9 +32,9 @@ public class HomeFragment extends Fragment {
         //clear the exampleList before adding new pattern objects
         exampleList.clear();
         //hardcoded example pattern objects
-        exampleList.add(new Pattern(R.drawable.ravelry_sample_photo, "gloves", "Susan"));
-        exampleList.add(new Pattern(R.drawable.armillafirm_small2, "thin sweater", "Jack"));
-        exampleList.add(new Pattern(R.drawable.beanies_medium2, "beanies", "Bob"));
+        exampleList.add(new Pattern(R.drawable.ravelry_sample_photo, "gloves", "Susan", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
+        exampleList.add(new Pattern(R.drawable.armillafirm_small2, "thin sweater", "Jack", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
+        exampleList.add(new Pattern(R.drawable.beanies_medium2, "beanies", "Bob", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
 
         setUpRecyclerView(); //method initializes and sets the recyclerview, adapter, and layout manager
 
@@ -51,10 +48,10 @@ public class HomeFragment extends Fragment {
     }
 
     public void setUpRecyclerView() {
-        mRecyclerView = binding.recyclerView; //initialize the RecyclerView from the binding object
+        RecyclerView mRecyclerView = binding.recyclerView; //initialize the RecyclerView from the binding object
         mRecyclerView.setHasFixedSize(true); //the size of the RecyclerView will remain constant and won't change as the contents of the adapter change
-        mLayoutManager = new LinearLayoutManager(getContext()); //LinearLayoutManager lays out items in a RecyclerView in a vertical fashion
-        mAdapter = new cardAdapter(exampleList); //A cardAdapter is a custom adapter class that provides the data to the RecyclerView to display.
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext()); //LinearLayoutManager lays out items in a RecyclerView in a vertical fashion
+        RecyclerView.Adapter mAdapter = new cardAdapter(exampleList); //A cardAdapter is a custom adapter class that provides the data to the RecyclerView to display.
         //The exampleList is passed to the constructor and contains the list of pattern objects that will be displayed in the RecyclerView.
         mRecyclerView.setLayoutManager(mLayoutManager); //ensures that the RecyclerView knows how to lay out its items
         mRecyclerView.setAdapter(mAdapter); //sets adapter

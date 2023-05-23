@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginRight="24dp"
                 android:background="@color/black"
                 android:onClick="savePattern"
@@ -65,15 +66,35 @@
                 android:textColor="@color/light_gray" />
 
             <TextView
-                android:id="@+id/patternInfo"
+                android:id="@+id/patternCraft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginRight="24dp"
-                android:maxLines="20"
-                android:text="stuff about the pattern\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-"
-                android:textSize="16sp" />
+                android:layout_marginBottom="8dp"
+                android:text="pattern craft"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/patternURL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="pattern URL"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/patternTotalYardage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="pattern total yardage"
+                android:textSize="20sp" />
+
         </LinearLayout>
     </ScrollView>
 

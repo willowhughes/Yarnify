@@ -20,9 +20,9 @@ public class PatternPageActivity extends AppCompatActivity {
     //this activity is the display page for a pattern when it is clicked on
 
     public ImageView image;
-    public TextView text1, text2;
+    public TextView text1, text2, text3, text4, text5;
     public Button saveButton;
-    public boolean isSaved;
+    public boolean isSaved; //todo implement checking device for whether current pattern is saved already
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,9 @@ public class PatternPageActivity extends AppCompatActivity {
         text1 = findViewById(R.id.patternName);
         text2 = findViewById(R.id.patternCreator);
         saveButton = findViewById(R.id.saveButton);
-        isSaved = false; //todo implement checking device for whether current pattern is saved already
+        text3 = findViewById(R.id.patternCraft);
+        text4= findViewById(R.id.patternURL);
+        text5 = findViewById(R.id.patternTotalYardage);
 
         Intent intent = getIntent(); //grabs intent from parent
         Pattern pat = intent.getParcelableExtra("clicked_item"); //grabs parceled patternObject that was clicked on to use in this class
@@ -42,6 +44,9 @@ public class PatternPageActivity extends AppCompatActivity {
         image.setImageResource(pat.getImageResource());
         text1.setText(pat.getTitle());
         text2.setText("by " + pat.getCreator());
+        text3.setText("Craft: " + pat.getCraft());
+        text4.setText("Pattern's URL: " + pat.getURL());
+        text5.setText("Total Yardage: " + pat.getTotalYardage());
 
         //sets a action bar with a back button that returns the user to the parent activity(main activity)
         setBackButton();
@@ -50,7 +55,6 @@ public class PatternPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveButton.setText("Saved");
-                isSaved = true;
                 //todo implement saving 'patternObject pat' to users device
             }
         });
