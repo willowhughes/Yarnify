@@ -29,11 +29,13 @@ public class PatternPageActivity extends AppCompatActivity {
     public boolean isSaved; //todo implement checking device for whether current pattern is saved already
 
     private PatternViewModel patternViewModel;
+    private static final String TAG = "PatternPageActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern_page);
+        setBackButton();
 
         //Access the database via the ViewModel
         patternViewModel = new ViewModelProvider(this).get(PatternViewModel.class);
@@ -57,17 +59,26 @@ public class PatternPageActivity extends AppCompatActivity {
         text4.setText("Pattern's URL: " + pat.getURL());
         text5.setText("Total Yardage: " + pat.getTotalYardage());
 
-        //sets a action bar with a back button that returns the user to the parent activity(main activity)
-        setBackButton();
+        //todo: check if pattern is already saved before inserting
+        isSaved = patternViewModel.checkPatternExists(pat);
+        if (isSaved) {
+            Log.d(TAG, "pattern is saved");
+            saveButton.setText("Saved");
+        } else {
+            Log.d(TAG, "pattern is not saved");
+            saveButton.setText("Save");
+        }
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveButton.setText("Saved");
-                //todo implement saving 'patternObject pat' to users device
-                isSaved = true;
-                //todo: check if pattern is already saved before inserting
-                patternViewModel.addPattern(pat);
+                if (isSaved) {
+                    saveButton.setText("Saved");
+                } else {
+                    saveButton.setText("Save");
+                }
+               //patternViewModel.addPattern(pat);
             }
         });
     }

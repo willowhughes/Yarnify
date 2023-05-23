@@ -18,7 +18,6 @@ public interface PatternDAO {
     @Query("SELECT * FROM Pattern WHERE id = :id")
     LiveData<Pattern> getPattern(long id);
 
-
     @Query("SELECT * FROM Pattern")
     LiveData<List<Pattern>> getPatterns();
 

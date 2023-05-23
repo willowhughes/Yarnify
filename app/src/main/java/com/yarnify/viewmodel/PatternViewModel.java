@@ -20,7 +20,13 @@ public class PatternViewModel  extends AndroidViewModel {
         repository = Repository.getInstance(application.getApplicationContext());
     }
 
-    //getPattern, getPatterns, addPattern, updatePattern, deletePattern
+    //checkPatternExists, getPattern, getPatterns, addPattern, updatePattern, deletePattern
+
+    public boolean checkPatternExists(Pattern pattern) {
+        LiveData<Pattern> existingPattern = repository.getPattern(pattern.getId());
+        return existingPattern.getValue() != null;
+    }
+
     public LiveData<Pattern> getPattern(long patternId) {
         return repository.getPattern(patternId);
     }

@@ -130,6 +130,7 @@ public class Repository {
     }
 
     //Pattern Table: getPattern, getPatterns, addPattern, updatePattern deletePattern
+
     public LiveData<Pattern> getPattern(long patternId) {
         return mPatternDAO.getPattern(patternId);
     }
