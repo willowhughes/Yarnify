@@ -60,25 +60,20 @@ public class PatternPageActivity extends AppCompatActivity {
         text5.setText("Total Yardage: " + pat.getTotalYardage());
 
         //todo: check if pattern is already saved before inserting
-        isSaved = patternViewModel.checkPatternExists(pat);
-        if (isSaved) {
-            Log.d(TAG, "pattern is saved");
-            saveButton.setText("Saved");
-        } else {
-            Log.d(TAG, "pattern is not saved");
-            saveButton.setText("Save");
-        }
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveButton.setText("Saved");
+                /*isSaved = patternViewModel.checkPatternExists(pat);
                 if (isSaved) {
                     saveButton.setText("Saved");
+                    Log.d(TAG, "pattern has been deleted");
+                    patternViewModel.deletePattern(pat);
                 } else {
                     saveButton.setText("Save");
-                }
-               //patternViewModel.addPattern(pat);
+                    Log.d(TAG, "pattern has been saved");
+                    patternViewModel.addPattern(pat);
+                }*/
+                patternViewModel.addPattern(pat);
             }
         });
     }

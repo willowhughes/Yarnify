@@ -162,4 +162,10 @@ public class Repository {
             mPatternDAO.deletePattern(id);
         });
     }
+
+    public void deleteAllPatterns() {
+        mDatabaseExecutor.execute(() -> {
+            mPatternDAO.deleteAllPatterns();
+        });
+    }
 }

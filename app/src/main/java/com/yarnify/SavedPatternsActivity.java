@@ -2,6 +2,7 @@ package com.yarnify;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,16 +10,19 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.yarnify.R;
 import com.yarnify.model.Pattern;
+import com.yarnify.viewmodel.PatternViewModel;
 
 import java.util.ArrayList;
 
 public class SavedPatternsActivity extends AppCompatActivity {
 
     ArrayList<Pattern> savedPatternExampleList = new ArrayList<>(); //array of pattern objects
+    private PatternViewModel patternViewModel;
     Context context = this;
 
     @Override
@@ -27,14 +31,16 @@ public class SavedPatternsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_saved_patterns);
         setBackButton();
 
-        //clear the exampleList before adding new pattern objects
-        savedPatternExampleList.clear();
-        //hardcoded example pattern objects until we can retrieve saved patterns from local database
-        savedPatternExampleList.add(new Pattern(R.drawable.ravelry_sample_photo, "gloves", "Susan", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
-        //exampleList.add(new Pattern(R.drawable.armillafirm_small2, "thin sweater", "Jack", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
-        savedPatternExampleList.add(new Pattern(R.drawable.beanies_medium2, "beanies", "Bob", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
-
-        setUpRecyclerView(context); //method initializes and sets the recyclerview, adapter, and layout manager
+        // observes the live data and gets all saved patterns to display.... I think?
+        patternViewModel = new ViewModelProvider(this).get(PatternViewModel.class);
+        patternViewModel.getPatterns().observe(this, patterns -> {
+            if (patterns != null) {
+                savedPatternExampleList.clear();
+                savedPatternExampleList.addAll(patterns);
+                Log.d("saved patterns amount", String.valueOf(savedPatternExampleList.size()));
+                setUpRecyclerView(context); //method initializes and sets the recyclerview, adapter, and layout manager
+            }
+        });
 
     }
 

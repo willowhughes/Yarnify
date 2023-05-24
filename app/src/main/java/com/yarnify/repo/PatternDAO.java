@@ -9,6 +9,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.yarnify.model.Pattern;
+import com.yarnify.model.Yarn;
 
 import java.util.List;
 
@@ -32,4 +33,8 @@ public interface PatternDAO {
 
     @Query("DELETE FROM Pattern WHERE id = :id")
     void deletePattern(long id);
+
+    // delete all patterns
+    @Query("DELETE FROM Pattern")
+    void deleteAllPatterns();
 }
