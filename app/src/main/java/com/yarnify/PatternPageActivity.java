@@ -13,10 +13,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.yarnify.R;
 import com.yarnify.model.Pattern;
+import com.yarnify.repo.Repository;
 import com.yarnify.viewmodel.PatternViewModel;
 
 public class PatternPageActivity extends AppCompatActivity {
@@ -26,7 +29,7 @@ public class PatternPageActivity extends AppCompatActivity {
     public ImageView image;
     public TextView text1, text2, text3, text4, text5;
     public Button saveButton;
-    public boolean isSaved; //todo implement checking device for whether current pattern is saved already
+    public boolean isSaved;
 
     private PatternViewModel patternViewModel;
     private static final String TAG = "PatternPageActivity";
@@ -59,11 +62,27 @@ public class PatternPageActivity extends AppCompatActivity {
         text4.setText("Pattern's URL: " + pat.getURL());
         text5.setText("Total Yardage: " + pat.getTotalYardage());
 
-        //todo: check if pattern is already saved before inserting
+
+        //todo: fix delete and maybe redo everything based on a key generated from title and creator
+
+        LiveData<Integer> patternCountLiveData = patternViewModel.getPatternCountLiveData(pat.getTitle(), pat.getCreator());
+        patternCountLiveData.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer count) {
+                isSaved = count > 0;
+                // Use the patternExists boolean value as needed
+                if (isSaved) {
+                    saveButton.setText("Saved");
+                } else {
+                    saveButton.setText("Save");
+                }
+            }
+        });
+
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*isSaved = patternViewModel.checkPatternExists(pat);
                 if (isSaved) {
                     saveButton.setText("Saved");
                     Log.d(TAG, "pattern has been deleted");
@@ -72,8 +91,7 @@ public class PatternPageActivity extends AppCompatActivity {
                     saveButton.setText("Save");
                     Log.d(TAG, "pattern has been saved");
                     patternViewModel.addPattern(pat);
-                }*/
-                patternViewModel.addPattern(pat);
+                }
             }
         });
     }

@@ -3,6 +3,7 @@ package com.yarnify.repo;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import com.yarnify.model.Needle;
@@ -21,6 +22,7 @@ public class Repository {
     private final YarnDAO mYarnDAO;
     private final NeedleDAO mNeedleDAO;
     private final PatternDAO mPatternDAO;
+    private LiveData<Integer> patternCountLiveData;
 
     //LiveData automatically uses a thread, so the ExecutorService will be used to insert/update/delete
     private static final ExecutorService mDatabaseExecutor =
@@ -140,8 +142,11 @@ public class Repository {
     }
 
     public void addPattern(Pattern pattern) {
-        mDatabaseExecutor.execute(() -> {
-            mPatternDAO.addPattern(pattern);
+        mDatabaseExecutor.execute(() -> { //logic for checking if the pattern already exists before inserting
+            int count = mPatternDAO.countPatterns(pattern.getTitle(), pattern.getCreator());
+            if (count == 0) {
+                mPatternDAO.addPattern(pattern);
+            }
         });
     }
 
@@ -167,5 +172,10 @@ public class Repository {
         mDatabaseExecutor.execute(() -> {
             mPatternDAO.deleteAllPatterns();
         });
+    }
+
+    public LiveData<Integer> getPatternCountLiveData(String title, String creator) {
+        patternCountLiveData = mPatternDAO.countPatterns2(title, creator);
+        return patternCountLiveData;
     }
 }

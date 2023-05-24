@@ -48,5 +48,8 @@ public class PatternViewModel  extends AndroidViewModel {
 
     public void deleteAllPatterns() { repository.deleteAllPatterns(); }
 
+    public LiveData<Integer> getPatternCountLiveData(String title, String creator) {
+        return repository.getPatternCountLiveData(title, creator);
+    }
 }
 

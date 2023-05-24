@@ -22,7 +22,7 @@ public interface PatternDAO {
     @Query("SELECT * FROM Pattern")
     LiveData<List<Pattern>> getPatterns();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     long addPattern(Pattern pattern);
 
     @Update
@@ -37,4 +37,11 @@ public interface PatternDAO {
     // delete all patterns
     @Query("DELETE FROM Pattern")
     void deleteAllPatterns();
+
+    // checks if a pattern with the same title and creator already exists in the database
+    @Query("SELECT COUNT(*) FROM Pattern WHERE title = :title AND creator = :creator")
+    int countPatterns(String title, String creator);
+
+    @Query("SELECT COUNT(*) FROM Pattern WHERE title = :title AND creator = :creator")
+    LiveData<Integer> countPatterns2(String title, String creator);
 }
