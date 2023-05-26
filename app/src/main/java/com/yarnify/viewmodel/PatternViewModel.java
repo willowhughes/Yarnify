@@ -46,3 +46,4 @@ public class PatternViewModel  extends AndroidViewModel {
     }
 
 }
+
