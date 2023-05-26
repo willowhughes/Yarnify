@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.yarnify.R;
 import com.yarnify.model.Pattern;
+import com.yarnify.viewmodel.PatternViewModel;
 
 public class PatternPageActivity extends AppCompatActivity {
 
@@ -25,10 +27,15 @@ public class PatternPageActivity extends AppCompatActivity {
     public Button saveButton;
     public boolean isSaved; //todo implement checking device for whether current pattern is saved already
 
+    private PatternViewModel patternViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern_page);
+
+        //Access the database via the ViewModel
+        patternViewModel = new ViewModelProvider(this).get(PatternViewModel.class);
 
         //sets local variables of the patterns data to the activity_pattern_page.xml layout's views
         image = findViewById(R.id.patternImage);
@@ -56,7 +63,10 @@ public class PatternPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveButton.setText("Saved");
-                //todo implement saving 'patternObject pat' to users device
+                isSaved = true;
+                //todo: check if pattern is already saved before inserting
+                patternViewModel.addPattern(pat);
+
             }
         });
     }
