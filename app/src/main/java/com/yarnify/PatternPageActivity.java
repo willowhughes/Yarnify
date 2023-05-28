@@ -55,8 +55,6 @@ public class PatternPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent(); //grabs intent from parent
         Pattern pat = intent.getParcelableExtra("clicked_item"); //grabs parceled patternObject that was clicked on to use in this class
-        //ID of saved pattern with matching title and creator columns
-        patternID = patternViewModel.getPatternIdByTitleAndCreator(pat.getTitle(), pat.getCreator());
 
         //sets patternObject's data to the pattern page's layout views
         image.setImageResource(pat.getImageResource());
@@ -65,9 +63,6 @@ public class PatternPageActivity extends AppCompatActivity {
         text3.setText("Craft: " + pat.getCraft());
         text4.setText("Pattern's URL: " + pat.getURL());
         text5.setText("Total Yardage: " + pat.getTotalYardage());
-
-
-        //todo: fix delete and maybe redo everything based on a key generated from title and creator
 
         //observes whether this pattern has been saved or not and updates the saved button's text as well as the isSaved boolean
         LiveData<Integer> patternCountLiveData = patternViewModel.getPatternCountLiveData(pat.getTitle(), pat.getCreator());
@@ -84,11 +79,12 @@ public class PatternPageActivity extends AppCompatActivity {
             }
         });
 
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isSaved) {
+                    //ID of saved pattern with matching title and creator columns
+                    patternID = patternViewModel.getPatternIdByTitleAndCreator(pat.getTitle(), pat.getCreator());
                     saveButton.setText("Save");
                     Log.d(TAG, "pattern has been deleted");
                     patternViewModel.deletePattern(patternID);

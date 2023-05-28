@@ -181,6 +181,11 @@ public class Repository {
         return patternCountLiveData;
     }
 
+
+    /*submits the query to the mDatabaseExecutor as a Callable task using submit(). The submit()
+    method returns a Future object that represents the result of the query. Then, the method waits
+    for the query result by calling future.get(), which blocks until the result is available. This
+    is done within a try-catch block to handle any potential exceptions that may occur.*/
     public long getPatternIdByTitleAndCreator(String title, String creator) {
         Future<Long> future = mDatabaseExecutor.submit(() ->
                 mPatternDAO.getPatternIdByTitleAndCreator(title, creator)

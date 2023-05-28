@@ -46,7 +46,7 @@ public interface PatternDAO {
     @Query("SELECT COUNT(*) FROM Pattern WHERE title = :title AND creator = :creator")
     LiveData<Integer> countPatterns2(String title, String creator);
 
-    // Get pattern ID by matching title and creator (for deleting purposes
+    // Get pattern ID by matching title and creator (for deleting purposes)
     @Query("SELECT id FROM Pattern WHERE title = :title AND creator = :creator LIMIT 1")
     long getPatternIdByTitleAndCreator(String title, String creator);
 }
