@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         getSupportActionBar().hide(); //hides title
-
         setUpBottomNav();
     }
 

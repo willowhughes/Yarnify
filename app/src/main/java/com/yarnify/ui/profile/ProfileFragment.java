@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.yarnify.R;
 import com.example.yarnify.databinding.FragmentProfileBinding;
 import com.example.yarnify.databinding.FragmentProfileBinding;
+import com.yarnify.NeedleListActivity;
 import com.yarnify.SavedPatternsActivity;
 
 public class ProfileFragment extends Fragment {
@@ -26,11 +27,21 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
 
         Button savedPatternsButton = root.findViewById(R.id.savedPatternsButton);
+        Button displayNeedleList = root.findViewById(R.id.needleListButton);
         savedPatternsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Launch the SavedPatternsActivity
                 Intent intent = new Intent(getActivity(), SavedPatternsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        displayNeedleList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Launch the SavedPatternsActivity
+                Intent intent = new Intent(getActivity(), NeedleListActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,0 +1,125 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_purple"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- https://stackoverflow.com/questions/3205387/how-do-i-change-the-text-style-of-a-spinner -->
+
+    <!-- SIZE dropdown list (if crochet, letters. if knit, numbers -->
+
+    <!-- LENGTH Text field -->
+    <!--TODO: BRAND, MATERIAL, QTY-->
+
+    <!--CRAFT Radio Button Knit or Crochet-->
+    <TextView
+        android:id="@+id/textNeedleType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="10dp"/>
+
+    <RadioGroup
+        android:id="@+id/craftType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="106dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textNeedleType"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+        <RadioButton
+            android:id="@+id/knittingNeedle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Knit"
+            android:textSize="24dp" />
+        <RadioButton
+            android:id="@+id/crochetHook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crochet"
+            android:textSize="24dp" />
+    </RadioGroup>
+
+    <!--TYPE DropDownList (needle_type_choices)-->
+    <Spinner
+        android:id="@+id/needleTypeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/craftType"
+        style="@style/SpinnerTextViewItem"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp" />
+
+    <TextView
+        android:id="@+id/textNeedleSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Size Information"
+        app:layout_constraintTop_toBottomOf="@id/needleTypeSpinner"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="10dp"/>
+
+    <!-- METRIC or US -->
+    <RadioGroup
+        android:id="@+id/needleSizeUnit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="106dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNeedleSize"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+        <RadioButton
+            android:id="@+id/metric"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Metric"
+            android:textSize="24dp" />
+        <RadioButton
+            android:id="@+id/us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="US"
+            android:textSize="24dp" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/needleSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/needleSizeUnit"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp"
+        style="@style/SpinnerTextViewItem"/>
+
+    <EditText
+        android:id="@+id/needleLength"
+        android:hint="Length"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/needleSize"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
+        android:text="Save"
+        app:layout_constraintTop_toBottomOf="@+id/needleLength"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
