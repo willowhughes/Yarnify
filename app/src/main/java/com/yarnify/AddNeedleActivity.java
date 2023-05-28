@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.core.view.WindowCompat;
 import androidx.navigation.NavController;
@@ -25,12 +28,36 @@ import com.example.yarnify.R;
 
 public class AddNeedleActivity extends AppCompatActivity {
     private Context context = this;
+    private String type;
+    private String craft;
+    private int metric;
+    private boolean isHook;
+    private String us;
+    private int length;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_needle);
         setBackButton();
+
+        //Spinner for type of needle
+        Spinner typeSpinner = findViewById(R.id.needleTypeSpinner);
+        ArrayAdapter<CharSequence> typeSpinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.needle_type_choices, android.R.layout.simple_spinner_item);
+        typeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(typeSpinnerAdapter);
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = (String)parent.getItemAtPosition(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
     }
     public void setBackButton() {
         // Get the support action bar
