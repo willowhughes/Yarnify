@@ -91,13 +91,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Metric"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:onClick="onUnitsSelected" />
         <RadioButton
             android:id="@+id/us"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="US"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:onClick="onUnitsSelected" />
     </RadioGroup>
 
     <Spinner

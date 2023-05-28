@@ -34,7 +34,7 @@ public class AddNeedleActivity extends AppCompatActivity {
     private String type;
     private String craft;
     private int metric;
-    private boolean isHook;
+    private boolean isHook, metricUnits;
     private String us;
     private int length;
 
@@ -69,7 +69,28 @@ public class AddNeedleActivity extends AppCompatActivity {
             }
         });
 
+        //Type Spinner initially shows all options
         setTypeSpinner(R.array.all_needle_type_choices);
+
+        //SizeUnit RadioButton
+        //https://stackoverflow.com/questions/22943045/why-oncheckedchanged-for-radiobutton-doesnt-get-raised-in-android
+        RadioGroup sizeUnitRadioGroup = (RadioGroup) findViewById(R.id.needleSizeUnit);
+        typeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                //Check which radio button was checked
+                switch (checkedId) {
+                    case R.id.metric:
+                        metricUnits = true;
+                        break;
+                    case R.id.us:
+                        metricUnits = false;
+                        break;
+                }
+            }
+        });
+
+
 
     }
 
@@ -116,6 +137,23 @@ public class AddNeedleActivity extends AppCompatActivity {
         }
     }
 
+    public void onUnitsSelected(View view) {
+        // Is the button checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        //Check which radio button was checked
+        switch (view.getId()) {
+            case R.id.metric:
+                if (checked){
+                    metricUnits = true;
+                }
+                break;
+            case R.id.crochetHook:
+                if (checked){
+                    metricUnits = false;
+                }
+                break;
+        }
+    }
     public void setBackButton() {
         // Get the support action bar
         ActionBar actionBar = getSupportActionBar();
