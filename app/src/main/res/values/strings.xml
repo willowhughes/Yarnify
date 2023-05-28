@@ -21,6 +21,7 @@
         <item>Double Pointed</item>
         <item>Circular</item>
         <item>Hook</item>
+        <item>Tunisian</item>
     </string-array>
 
     <string-array name="needle_size_metric_choices">
