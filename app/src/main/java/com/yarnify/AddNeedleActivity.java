@@ -56,13 +56,13 @@ public class AddNeedleActivity extends AppCompatActivity {
                     case R.id.knittingNeedle:
                         craft = "knitting";
                         isHook = false;
-                        Log.i("Craft:", craft);
+                        Log.i("Changed Craft:", craft);
                         setTypeSpinner(R.array.knitting_needle_type_choices);
                         break;
                     case R.id.crochetHook:
                         craft = "crochet";
                         isHook = true;
-                        Log.i("Craft:", craft);
+                        Log.i("Changed Craft:", craft);
                         setTypeSpinner(R.array.crochet_hook_type_choices);
                         break;
                 }
@@ -75,23 +75,30 @@ public class AddNeedleActivity extends AppCompatActivity {
         //SizeUnit RadioButton
         //https://stackoverflow.com/questions/22943045/why-oncheckedchanged-for-radiobutton-doesnt-get-raised-in-android
         RadioGroup sizeUnitRadioGroup = (RadioGroup) findViewById(R.id.needleSizeUnit);
-        typeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        sizeUnitRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 //Check which radio button was checked
                 switch (checkedId) {
                     case R.id.metric:
                         metricUnits = true;
+                        Log.i("Changed Units", "metric");
+                        setSizeSpinner(R.array.needle_size_metric_choices);
                         break;
                     case R.id.us:
                         metricUnits = false;
+                        Log.i("Changed Units", "us");
+                        if(isHook){
+                            setSizeSpinner(R.array.needle_size_US_crochet_choices);
+                        } else {
+                            setSizeSpinner(R.array.needle_size_US_knit_choices);
+                        }
                         break;
                 }
             }
         });
 
-
-
+        setSizeSpinner(R.array.needle_size_metric_choices);
     }
 
     /*
@@ -117,6 +124,33 @@ public class AddNeedleActivity extends AppCompatActivity {
         });
     }
 
+    /*
+     * Sets and updates the Type Spinner to whatever array is appropriate
+     * @params: int array ResourceID - the id of the array of strings for the dropdown
+     */
+    private void setSizeSpinner(int arrayResourceId) {
+        //Spinner for type of needle
+        Spinner unitSpinner = findViewById(R.id.needleSizeSpinner);
+        int sizeChoicesArrayId = arrayResourceId;
+        ArrayAdapter<CharSequence> sizeSpinnerAdapter = ArrayAdapter.createFromResource(this,
+                sizeChoicesArrayId, android.R.layout.simple_spinner_item);
+        sizeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        unitSpinner.setAdapter(sizeSpinnerAdapter);
+        unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(metricUnits){
+                    Log.i("Metric Units are", (String) parent.getItemAtPosition(position));
+                } else {
+                    Log.i("US Units are", (String) parent.getItemAtPosition(position));
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
     public void onCraftSelected(View view) {
         // Is the button checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -135,6 +169,7 @@ public class AddNeedleActivity extends AppCompatActivity {
                 }
                 break;
         }
+        Log.i("Craft:", craft);
     }
 
     public void onUnitsSelected(View view) {
@@ -145,11 +180,13 @@ public class AddNeedleActivity extends AppCompatActivity {
             case R.id.metric:
                 if (checked){
                     metricUnits = true;
+                    Log.i("Units", "metric");
                 }
                 break;
             case R.id.crochetHook:
                 if (checked){
                     metricUnits = false;
+                    Log.i("Units", "us");
                 }
                 break;
         }
