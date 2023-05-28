@@ -51,5 +51,9 @@ public class PatternViewModel  extends AndroidViewModel {
     public LiveData<Integer> getPatternCountLiveData(String title, String creator) {
         return repository.getPatternCountLiveData(title, creator);
     }
+
+    public long getPatternIdByTitleAndCreator(String title, String creator) {
+        return repository.getPatternIdByTitleAndCreator(title, creator);
+    }
 }
 

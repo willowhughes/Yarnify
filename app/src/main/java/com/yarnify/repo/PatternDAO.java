@@ -38,10 +38,15 @@ public interface PatternDAO {
     @Query("DELETE FROM Pattern")
     void deleteAllPatterns();
 
-    // checks if a pattern with the same title and creator already exists in the database
+    // checks if a pattern with the same title and creator already exists in the database before inserting
     @Query("SELECT COUNT(*) FROM Pattern WHERE title = :title AND creator = :creator")
     int countPatterns(String title, String creator);
 
+    // checks if a pattern with the same title and creator already exists in the database to update boolean and button in activity
     @Query("SELECT COUNT(*) FROM Pattern WHERE title = :title AND creator = :creator")
     LiveData<Integer> countPatterns2(String title, String creator);
+
+    // Get pattern ID by matching title and creator (for deleting purposes
+    @Query("SELECT id FROM Pattern WHERE title = :title AND creator = :creator LIMIT 1")
+    long getPatternIdByTitleAndCreator(String title, String creator);
 }

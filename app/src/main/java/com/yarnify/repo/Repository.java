@@ -12,8 +12,10 @@ import com.yarnify.model.Yarn;
 import com.yarnify.model.Pattern;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 public class Repository {
@@ -177,5 +179,18 @@ public class Repository {
     public LiveData<Integer> getPatternCountLiveData(String title, String creator) {
         patternCountLiveData = mPatternDAO.countPatterns2(title, creator);
         return patternCountLiveData;
+    }
+
+    public long getPatternIdByTitleAndCreator(String title, String creator) {
+        Future<Long> future = mDatabaseExecutor.submit(() ->
+                mPatternDAO.getPatternIdByTitleAndCreator(title, creator)
+        );
+
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return 0; // Return a default value or handle the error as needed
+        }
     }
 }

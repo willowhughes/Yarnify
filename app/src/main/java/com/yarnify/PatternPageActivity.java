@@ -33,6 +33,7 @@ public class PatternPageActivity extends AppCompatActivity {
 
     private PatternViewModel patternViewModel;
     private static final String TAG = "PatternPageActivity";
+    long patternID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,9 @@ public class PatternPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent(); //grabs intent from parent
         Pattern pat = intent.getParcelableExtra("clicked_item"); //grabs parceled patternObject that was clicked on to use in this class
+        //ID of saved pattern with matching title and creator columns
+        patternID = patternViewModel.getPatternIdByTitleAndCreator(pat.getTitle(), pat.getCreator());
+
         //sets patternObject's data to the pattern page's layout views
         image.setImageResource(pat.getImageResource());
         text1.setText(pat.getTitle());
@@ -65,6 +69,7 @@ public class PatternPageActivity extends AppCompatActivity {
 
         //todo: fix delete and maybe redo everything based on a key generated from title and creator
 
+        //observes whether this pattern has been saved or not and updates the saved button's text as well as the isSaved boolean
         LiveData<Integer> patternCountLiveData = patternViewModel.getPatternCountLiveData(pat.getTitle(), pat.getCreator());
         patternCountLiveData.observe(this, new Observer<Integer>() {
             @Override
@@ -84,11 +89,11 @@ public class PatternPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isSaved) {
-                    saveButton.setText("Saved");
-                    Log.d(TAG, "pattern has been deleted");
-                    patternViewModel.deletePattern(pat);
-                } else {
                     saveButton.setText("Save");
+                    Log.d(TAG, "pattern has been deleted");
+                    patternViewModel.deletePattern(patternID);
+                } else {
+                    saveButton.setText("Saved");
                     Log.d(TAG, "pattern has been saved");
                     patternViewModel.addPattern(pat);
                 }
