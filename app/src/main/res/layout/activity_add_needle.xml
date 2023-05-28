@@ -41,12 +41,15 @@
             android:layout_height="wrap_content"
             android:text="Knit"
             android:textSize="24dp" />
+            <!--android:onClick="onCraftSelected"-->
+
         <RadioButton
             android:id="@+id/crochetHook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Crochet"
             android:textSize="24dp" />
+        <!--android:onClick="onCraftSelected"-->
     </RadioGroup>
 
     <!--TYPE DropDownList (needle_type_choices)-->

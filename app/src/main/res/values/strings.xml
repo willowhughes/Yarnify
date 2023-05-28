@@ -16,7 +16,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="needle_type_choices">
+    <string-array name="knitting_needle_type_choices">
+        <item>Straight</item>
+        <item>Double Pointed</item>
+        <item>Circular</item>
+    </string-array>
+
+    <string-array name="crochet_hook_type_choices">
+        <item>Hook</item>
+        <item>Tunisian</item>
+    </string-array>
+
+    <string-array name="all_needle_type_choices">
         <item>Straight</item>
         <item>Double Pointed</item>
         <item>Circular</item>

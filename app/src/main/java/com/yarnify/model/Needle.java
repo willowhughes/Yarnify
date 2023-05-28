@@ -21,7 +21,7 @@ public class Needle {
     @ColumnInfo(name="type")
     private String mType;
 
-    //knitting, crochet, machine knitting, loom knitting
+    //knitting, crochet
     @NonNull
     @ColumnInfo(name="craft")
     private String mCraft;
