@@ -58,12 +58,22 @@ public class AddNeedleActivity extends AppCompatActivity {
                         isHook = false;
                         Log.i("Changed Craft:", craft);
                         setTypeSpinner(R.array.knitting_needle_type_choices);
+                        if(metricUnits){
+                            setSizeSpinner(R.array.needle_size_metric_choices);
+                        } else {
+                            setSizeSpinner(R.array.needle_size_US_knit_choices);
+                        }
                         break;
                     case R.id.crochetHook:
                         craft = "crochet";
                         isHook = true;
                         Log.i("Changed Craft:", craft);
                         setTypeSpinner(R.array.crochet_hook_type_choices);
+                        if(metricUnits){
+                            setSizeSpinner(R.array.needle_size_metric_choices);
+                        } else {
+                            setSizeSpinner(R.array.needle_size_US_crochet_choices);
+                        }
                         break;
                 }
             }
