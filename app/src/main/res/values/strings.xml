@@ -46,7 +46,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="needle_type_choices">
@@ -97,4 +97,5 @@
         <item>N-15</item>
         <item>P-16</item>
     </string-array>
+    <string name="title_activity_add_needle">AddNeedleActivity</string>
 </resources>

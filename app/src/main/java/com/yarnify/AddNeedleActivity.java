@@ -1,12 +1,10 @@
 package com.yarnify;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,39 +18,20 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.yarnify.databinding.ActivityNeedleListBinding;
+import com.example.yarnify.databinding.ActivityAddNeedleBinding;
 
 import com.example.yarnify.R;
-import com.yarnify.model.Pattern;
-import com.yarnify.viewmodel.NeedleViewModel;
 
-public class NeedleListActivity extends AppCompatActivity {
-    private NeedleViewModel needleViewModel;
+public class AddNeedleActivity extends AppCompatActivity {
     private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_needle_list);
+        setContentView(R.layout.activity_add_needle);
         setBackButton();
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Enter New Needle or Hook", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(context, AddNeedleActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
-
     public void setBackButton() {
         // Get the support action bar
         ActionBar actionBar = getSupportActionBar();
