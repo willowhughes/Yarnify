@@ -46,4 +46,55 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="needle_type_choices">
+        <item>Straight</item>
+        <item>Double Pointed</item>
+        <item>Circular</item>
+        <item>Hook</item>
+    </string-array>
+
+    <string-array name="needle_size_metric_choices">
+        <item>4.0</item>
+        <item>5.0</item>
+        <item>5.5</item>
+        <item>6.0</item>
+        <item>6.5</item>
+        <item>8.0</item>
+        <item>9.0</item>
+        <item>10.0</item>
+        <item>11.5</item>
+    </string-array>
+
+    <string-array name="needle_size_US_knit_choices">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>10 1/2</item>
+        <item>11</item>
+        <item>13</item>
+        <item>15</item>
+    </string-array>
+
+    <string-array name="needle_size_US_crochet_choices">
+        <item>G-6</item>
+        <item>H-8</item>
+        <item>I-9</item>
+        <item>J-10</item>
+        <item>K-10.5</item>
+        <item>L-11</item>
+        <item>M-13</item>
+        <item>N-15</item>
+        <item>P-16</item>
+    </string-array>
 </resources>
