@@ -1,6 +1,8 @@
 package com.yarnify.repo;
 
 
+import static org.junit.Assert.assertNotEquals;
+
 import android.content.Context;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
@@ -46,6 +48,7 @@ public class LocalDatabaseTest extends TestCase {
         db.close();
     }
 
+    //User DAO tests
     @Test
     public void writeUserAndGetById() throws Exception{
         User judy = new User("Judy", "helloJudy");
@@ -54,5 +57,20 @@ public class LocalDatabaseTest extends TestCase {
         assertEquals(userId, LiveDataTestUtil.getValue(userDAO.getUser(userId)).getId());
         assertEquals(judy.getUsername(), LiveDataTestUtil.getValue(userDAO.getUser(userId)).getUsername());
         assertEquals(judy.getRavelryUsername(), LiveDataTestUtil.getValue(userDAO.getUser(userId)).getRavelryUsername());
+    }
+
+    @Test
+    public void updateUserIncludingUpdateTime() throws Exception{
+        User judy = new User("Judy", "helloJudy");
+        long userId = userDAO.addUser(judy);
+        User judyFromDb = LiveDataTestUtil.getValue(userDAO.getUser(userId));
+        long timeUserCreated = judyFromDb.getUpdateTime();
+        judyFromDb.setUsername("Judy_B");
+        judyFromDb.setRavelryUsername("goodbyeJudy");
+        userDAO.updateUser(judyFromDb);
+
+        assertEquals("Judy_B", LiveDataTestUtil.getValue(userDAO.getUser(userId)).getUsername());
+        assertEquals("goodbyeJudy", LiveDataTestUtil.getValue(userDAO.getUser(userId)).getRavelryUsername());
+        assertEquals(timeUserCreated, LiveDataTestUtil.getValue(userDAO.getUser(userId)).getUpdateTime());
     }
 }

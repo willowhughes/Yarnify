@@ -3,4 +3,78 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_activity_needle_list">NeedleListActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum
+    </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="knitting_needle_type_choices">
+        <item>Straight</item>
+        <item>Double Pointed</item>
+        <item>Circular</item>
+    </string-array>
+
+    <string-array name="crochet_hook_type_choices">
+        <item>Hook</item>
+        <item>Tunisian</item>
+    </string-array>
+
+    <string-array name="all_needle_type_choices">
+        <item>Straight</item>
+        <item>Double Pointed</item>
+        <item>Circular</item>
+        <item>Hook</item>
+        <item>Tunisian</item>
+    </string-array>
+
+    <string-array name="needle_size_metric_choices">
+        <item>4.0</item>
+        <item>5.0</item>
+        <item>5.5</item>
+        <item>6.0</item>
+        <item>6.5</item>
+        <item>8.0</item>
+        <item>9.0</item>
+        <item>10.0</item>
+        <item>11.5</item>
+    </string-array>
+
+    <string-array name="needle_size_US_knit_choices">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>10 ½</item>
+        <item>11</item>
+        <item>13</item>
+        <item>15</item>
+    </string-array>
+
+    <string-array name="needle_size_US_crochet_choices">
+        <item>G-6</item>
+        <item>H-8</item>
+        <item>I-9</item>
+        <item>J-10</item>
+        <item>K-10.5</item>
+        <item>L-11</item>
+        <item>M-13</item>
+        <item>N-15</item>
+        <item>P-16</item>
+    </string-array>
+    <string name="title_activity_add_needle">AddNeedleActivity</string>
 </resources>
