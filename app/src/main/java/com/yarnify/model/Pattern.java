@@ -2,11 +2,14 @@ package com.yarnify.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.squareup.picasso.Picasso;
 
 @Entity
 public class Pattern implements Parcelable {
@@ -20,7 +23,7 @@ public class Pattern implements Parcelable {
     private long mUpdateTime;
 
     @ColumnInfo(name="image")
-    private int mImageResource;
+    private String mImageResource;
 
     @NonNull
     @ColumnInfo(name="title")
@@ -46,7 +49,7 @@ public class Pattern implements Parcelable {
     //FK: pattern_needle_sizes
 
     // CONSTRUCTOR
-    public Pattern(int imageResource, @NonNull String title, @NonNull String creator, String craft, String mURL, int totalYardage) {
+    public Pattern(String imageResource, @NonNull String title, @NonNull String creator, String craft, String mURL, int totalYardage) {
         this.mImageResource = imageResource;
         this.mTitle = title;
         this.mCreator = creator;
@@ -67,8 +70,8 @@ public class Pattern implements Parcelable {
     public long getUpdateTime() { return  mUpdateTime; }
     public void setUpdateTime(long updateTime){ this.mUpdateTime = updateTime; }
 
-    public int getImageResource() { return mImageResource; }
-    public void setImageResource(int imageResource) { this.mImageResource = imageResource; }
+    public String getImageResource() { return mImageResource; }
+    public void setImageResource(String imageResource) { this.mImageResource = imageResource; }
 
     public String getTitle() { return mTitle; }
     public void setTitle(String title) { this.mTitle = title; }
@@ -91,7 +94,7 @@ public class Pattern implements Parcelable {
     //allows instances of this object to be passed through activities
 
     protected Pattern(Parcel in) {
-        mImageResource = in.readInt();
+        mImageResource = in.readString();
         mTitle = in.readString();
         mCreator = in.readString();
         mCraft = in.readString();
@@ -118,7 +121,7 @@ public class Pattern implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeInt(mImageResource);
+        parcel.writeString(mImageResource);
         parcel.writeString(mTitle);
         parcel.writeString(mCreator);
         parcel.writeString(mCraft);

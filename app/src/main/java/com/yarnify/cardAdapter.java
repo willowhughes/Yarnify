@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yarnify.R;
+import com.squareup.picasso.Picasso;
 import com.yarnify.model.Pattern;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class cardAdapter extends RecyclerView.Adapter<cardAdapter.exampleViewHol
     public void onBindViewHolder(@NonNull exampleViewHolder holder, int position) { //This method is called to bind the data to a specific view holder
         Pattern currentItem = mExampleList.get(position);
         //sets the values of the ImageView and two TextView views in the exampleViewHolder object based on the patternObject at the position in the mExampleList array.
-        holder.mImageView.setImageResource(currentItem.getImageResource());
+        Picasso.get().load(currentItem.getImageResource()).into(holder.mImageView);
         holder.mTextView1.setText(currentItem.getTitle());
         holder.mTextView2.setText("by " + currentItem.getCreator());
 

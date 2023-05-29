@@ -21,12 +21,12 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    ArrayList<Pattern> exampleList = new ArrayList<>(); //array of pattern objects
     //binding is an instance of the auto-generated FragmentHomeBinding class, which is used to bind the layout XML elements to their corresponding Java objects.
     private FragmentHomeBinding binding;
-
     private PatternViewModel patternViewModel;
-    private ArrayList<Pattern> patternList = new ArrayList<>();
+
+    ArrayList<Pattern> exampleList = new ArrayList<>(); //array of pattern objects
+    private String url;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -37,9 +37,10 @@ public class HomeFragment extends Fragment {
         //clear the exampleList before adding new pattern objects
         exampleList.clear();
         //hardcoded example pattern objects
-        exampleList.add(new Pattern(R.drawable.ravelry_sample_photo, "gloves", "Susan", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
-        exampleList.add(new Pattern(R.drawable.armillafirm_small2, "thin sweater", "Jack", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
-        exampleList.add(new Pattern(R.drawable.beanies_medium2, "beanies", "Bob", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
+        exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/Finnceburk/926533726/IMG_9809_medium.jpg", "Dragon Derek", "Finn Burke", "Crochet", "https://www.ravelry.com/patterns/library/dragon-derek", 383));
+        exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/mongaknit/926461293/20230513_1431102_small2.png", "DDuDDu", "mongaknit kang", "\n" +
+                "Knitting", "https://www.ravelry.com/patterns/library/dduddu", 0));
+        exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/nawatramani/926341990/Making_Waves_4_small2.jpg", "Making Waves", "Nita Awatramani", "Knitting", "https://www.ravelry.com/patterns/library/making-waves-31", 0));
 
         setUpRecyclerView(); //method initializes and sets the recyclerview, adapter, and layout manager
 
