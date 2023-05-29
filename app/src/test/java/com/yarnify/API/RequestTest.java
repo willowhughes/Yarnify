@@ -35,7 +35,6 @@ public class RequestTest {
         //Next steps would be to
         //      How to get and set serialized name of pattern...
         //      create more accurate classes and work through them
-        assertEquals("test", ac.getPatterns().getPattern().get("name"));
+        assertEquals("test", ac.getPatterns().getPattern().get("gauge"));
     }
-
 }

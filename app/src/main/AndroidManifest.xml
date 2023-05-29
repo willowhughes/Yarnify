@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,14 +14,28 @@
         android:theme="@style/Theme.Yarnify"
         tools:targetApi="31">
         <activity
-            android:name="com.yarnify.patternPage"
+            android:name="com.yarnify.AddNeedleActivity"
             android:exported="false"
-            android:parentActivityName="com.yarnify.MainActivity"/>
+            android:label="@string/title_activity_add_needle"
+            android:parentActivityName="com.yarnify.NeedleListActivity"
+            android:theme="@style/Theme.Yarnify" />
+        <activity
+            android:name="com.yarnify.NeedleListActivity"
+            android:exported="false"
+            android:parentActivityName="com.yarnify.MainActivity" />
+        <activity
+            android:name="com.yarnify.PatternPageActivity"
+            android:exported="false"
+            android:parentActivityName="com.yarnify.MainActivity" />
+        <activity
+            android:name="com.yarnify.SavedPatternsActivity"
+            android:exported="false"
+            android:parentActivityName="com.yarnify.MainActivity" />
         <activity
             android:name="com.yarnify.MainActivity"
-            android:launchMode="singleTask"
             android:exported="true"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
