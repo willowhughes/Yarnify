@@ -6,6 +6,7 @@ import com.example.yarnify.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yarnify.databinding.ActivityMainBinding;
+import com.yarnify.viewmodel.PatternViewModel;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ActivityMainBinding binding;
+    private PatternViewModel patternViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the layout using the View Binding library and set the activity's content view
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         getSupportActionBar().hide(); //hides title
         setUpBottomNav();
+
+        //this can be used to nuke the pattern table
+        //patternViewModel = new ViewModelProvider(this).get(PatternViewModel.class);
+        //patternViewModel.deleteAllPatterns();
     }
 
     public void setUpBottomNav() {

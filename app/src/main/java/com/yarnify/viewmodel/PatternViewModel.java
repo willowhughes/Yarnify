@@ -21,6 +21,7 @@ public class PatternViewModel  extends AndroidViewModel {
     }
 
     //getPattern, getPatterns, addPattern, updatePattern, deletePattern
+
     public LiveData<Pattern> getPattern(long patternId) {
         return repository.getPattern(patternId);
     }
@@ -45,5 +46,14 @@ public class PatternViewModel  extends AndroidViewModel {
         repository.deletePattern(id);
     }
 
+    public void deleteAllPatterns() { repository.deleteAllPatterns(); }
+
+    public LiveData<Integer> getPatternCountLiveData(String title, String creator) {
+        return repository.getPatternCountLiveData(title, creator);
+    }
+
+    public long getPatternIdByTitleAndCreator(String title, String creator) {
+        return repository.getPatternIdByTitleAndCreator(title, creator);
+    }
 }
 

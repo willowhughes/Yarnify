@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import com.example.yarnify.R;
 import com.yarnify.cardAdapter;
 import com.example.yarnify.databinding.FragmentHomeBinding;
 import com.yarnify.model.Pattern;
+import com.yarnify.viewmodel.PatternViewModel;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,9 @@ public class HomeFragment extends Fragment {
     ArrayList<Pattern> exampleList = new ArrayList<>(); //array of pattern objects
     //binding is an instance of the auto-generated FragmentHomeBinding class, which is used to bind the layout XML elements to their corresponding Java objects.
     private FragmentHomeBinding binding;
+
+    private PatternViewModel patternViewModel;
+    private ArrayList<Pattern> patternList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -37,6 +42,7 @@ public class HomeFragment extends Fragment {
         exampleList.add(new Pattern(R.drawable.beanies_medium2, "beanies", "Bob", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
 
         setUpRecyclerView(); //method initializes and sets the recyclerview, adapter, and layout manager
+
 
         return root; // Return the root view created by inflating the FragmentHomeBinding
     }

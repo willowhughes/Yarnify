@@ -3,6 +3,7 @@ package com.yarnify.repo;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import com.yarnify.model.Needle;
@@ -11,8 +12,10 @@ import com.yarnify.model.Yarn;
 import com.yarnify.model.Pattern;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 public class Repository {
@@ -21,6 +24,7 @@ public class Repository {
     private final YarnDAO mYarnDAO;
     private final NeedleDAO mNeedleDAO;
     private final PatternDAO mPatternDAO;
+    private LiveData<Integer> patternCountLiveData;
 
     //LiveData automatically uses a thread, so the ExecutorService will be used to insert/update/delete
     private static final ExecutorService mDatabaseExecutor =
@@ -130,6 +134,7 @@ public class Repository {
     }
 
     //Pattern Table: getPattern, getPatterns, addPattern, updatePattern deletePattern
+
     public LiveData<Pattern> getPattern(long patternId) {
         return mPatternDAO.getPattern(patternId);
     }
@@ -139,8 +144,11 @@ public class Repository {
     }
 
     public void addPattern(Pattern pattern) {
-        mDatabaseExecutor.execute(() -> {
-            mPatternDAO.addPattern(pattern);
+        mDatabaseExecutor.execute(() -> { //logic for checking if the pattern already exists before inserting
+            int count = mPatternDAO.countPatterns(pattern.getTitle(), pattern.getCreator());
+            if (count == 0) {
+                mPatternDAO.addPattern(pattern);
+            }
         });
     }
 
@@ -160,5 +168,34 @@ public class Repository {
         mDatabaseExecutor.execute(() -> {
             mPatternDAO.deletePattern(id);
         });
+    }
+
+    public void deleteAllPatterns() {
+        mDatabaseExecutor.execute(() -> {
+            mPatternDAO.deleteAllPatterns();
+        });
+    }
+
+    public LiveData<Integer> getPatternCountLiveData(String title, String creator) {
+        patternCountLiveData = mPatternDAO.countPatterns2(title, creator);
+        return patternCountLiveData;
+    }
+
+
+    /*submits the query to the mDatabaseExecutor as a Callable task using submit(). The submit()
+    method returns a Future object that represents the result of the query. Then, the method waits
+    for the query result by calling future.get(), which blocks until the result is available. This
+    is done within a try-catch block to handle any potential exceptions that may occur.*/
+    public long getPatternIdByTitleAndCreator(String title, String creator) {
+        Future<Long> future = mDatabaseExecutor.submit(() ->
+                mPatternDAO.getPatternIdByTitleAndCreator(title, creator)
+        );
+
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return 0; // Return a default value or handle the error as needed
+        }
     }
 }
