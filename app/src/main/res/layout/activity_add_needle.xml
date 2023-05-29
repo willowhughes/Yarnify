@@ -115,6 +115,7 @@
     <EditText
         android:id="@+id/needleLength"
         android:hint="Length"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
@@ -122,6 +123,7 @@
         app:layout_constraintTop_toBottomOf="@+id/needleSizeSpinner"/>
 
     <Button
+        android:id="@+id/saveNeedleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/ButtonStyle"
