@@ -2,22 +2,17 @@ package com.yarnify;
 
 import android.os.Bundle;
 
-import com.example.yarnify.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.yarnify.R;
 import com.example.yarnify.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.yarnify.API.Request;
 import com.yarnify.viewmodel.PatternViewModel;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         //this can be used to nuke the pattern table
         //patternViewModel = new ViewModelProvider(this).get(PatternViewModel.class);
         //patternViewModel.deleteAllPatterns();
+
+        Request request =
+                new Request("patterns.json?ids=1335913");
     }
 
     public void setUpBottomNav() {

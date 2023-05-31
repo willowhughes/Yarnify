@@ -1,6 +1,5 @@
 package com.yarnify.API.ResponseModels;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,15 +7,16 @@ public class ResponsePattern {
 
 
     //need to dynamically get this field from query?
-    @SerializedName("1335913")
+    @SerializedName(value = "1335913", alternate = {"1337254"})
     @Expose(deserialize = true)
-    private JsonObject pattern;
+    private ResponsePatternAttributes pattern;
 
-    public JsonObject getPattern() {
+    public ResponsePatternAttributes getPatternAttributes() {
+
         return pattern;
     }
 
-    public void setPattern(JsonObject pattern) {
+    public void setPattern(ResponsePatternAttributes pattern) {
         this.pattern = pattern;
     }
 }

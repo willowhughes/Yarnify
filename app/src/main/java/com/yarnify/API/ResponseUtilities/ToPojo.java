@@ -8,15 +8,13 @@ import com.yarnify.API.ResponseModels.ResponsePatternList;
 
 public class ToPojo {
 
-    public ToPojo(){
-
-    }
+    public ToPojo(){}
     public ResponsePatternList fromJSONSimple(String json){
 
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
 
         Gson gson = new GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
+                //.excludeFieldsWithoutExposeAnnotation()
                 .create();
 
         ResponsePatternList alexPatternClassFromJSON = gson.fromJson(jsonObject, ResponsePatternList.class);

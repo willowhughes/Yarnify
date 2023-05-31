@@ -1,19 +1,22 @@
 package com.yarnify.ui.home;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yarnify.R;
-import com.yarnify.cardAdapter;
 import com.example.yarnify.databinding.FragmentHomeBinding;
+import com.yarnify.API.Request;
+import com.yarnify.API.ResponseModels.ResponsePatternList;
+import com.yarnify.API.ResponseUtilities.ToPojo;
+import com.yarnify.cardAdapter;
 import com.yarnify.model.Pattern;
 import com.yarnify.viewmodel.PatternViewModel;
 
@@ -30,6 +33,31 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
+        // Alex Changes start here
+
+        // I don't think this is an ideal way to allow Network stuff on the main thread
+        // Just using it for testing purposes
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        Request request =
+                new Request("patterns.json?ids=1335913");
+
+
+        ToPojo toPojo =
+                new ToPojo();
+
+        ResponsePatternList ac = toPojo.fromJSONSimple(request.getResponse());
+
+
+        // I can make cleaner methods for these, but this is an example of how the classes
+        // are deserialize and accessed
+        String title1 = ac.getPatterns().getPatternAttributes().getTitle();
+        String name1 = ac.getPatterns().getPatternAttributes().getPattern_author().getName();
+        String craft1 = ac.getPatterns().getPatternAttributes().getCraft().getName();
+
+
         // Inflate the layout for this fragment using the FragmentHomeBinding
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -37,7 +65,12 @@ public class HomeFragment extends Fragment {
         //clear the exampleList before adding new pattern objects
         exampleList.clear();
         //hardcoded example pattern objects
-        exampleList.add(new Pattern(R.drawable.ravelry_sample_photo, "gloves", "Susan", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
+        exampleList.add(new Pattern(R.drawable.ravelry_sample_photo, title1, name1, craft1, "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
+
+
+        // Alex changes end here
+
+
         exampleList.add(new Pattern(R.drawable.armillafirm_small2, "thin sweater", "Jack", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
         exampleList.add(new Pattern(R.drawable.beanies_medium2, "beanies", "Bob", "Crochet", "https://www.ravelry.com/patterns/library/helia-bolero", 1500));
 
