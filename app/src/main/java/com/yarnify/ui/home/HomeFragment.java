@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
         String title1 = ac.getPatterns().getPatternAttributes().getTitle();
         String name1 = ac.getPatterns().getPatternAttributes().getPattern_author().getName();
         String craft1 = ac.getPatterns().getPatternAttributes().getCraft().getName();
+        String photoURL1 = ac.getPatterns().getPatternAttributes().getPhotos().get(0).getMedium_url();
 
 
         // Inflate the layout for this fragment using the FragmentHomeBinding

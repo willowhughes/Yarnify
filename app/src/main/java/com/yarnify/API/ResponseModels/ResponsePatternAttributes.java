@@ -13,7 +13,7 @@ public class ResponsePatternAttributes {
     private String image;
     private ResponseAttributeCraft craft;
     private ResponsePatternAuthor pattern_author;
-    private ArrayList<ResponsePatternAttributesPhotos> photos;
+    private ArrayList<ResponsePatternAttributesPhoto> photos;
 
     public String getTitle() {
         return title;
@@ -25,5 +25,9 @@ public class ResponsePatternAttributes {
 
     public ResponseAttributeCraft getCraft() {
         return craft;
+    }
+
+    public ArrayList<ResponsePatternAttributesPhoto> getPhotos() {
+        return photos;
     }
 }
