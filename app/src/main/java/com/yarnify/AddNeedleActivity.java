@@ -33,12 +33,10 @@ import com.example.yarnify.R;
 public class AddNeedleActivity extends AppCompatActivity {
     private Context context = this;
     private Button saveNeedleButton;
-    private String type;
-    private String craft;
-    private int metric;
+
+    private String craft, type, us;
+    private int metric, length;
     private boolean isHook, metricUnits;
-    private String us;
-    private int length;
 
 
     @Override
@@ -48,6 +46,8 @@ public class AddNeedleActivity extends AppCompatActivity {
         setBackButton();
 
         //Type RadioButton
+        //The options in the TypeSpinner are changed depending on which RadioButton is checked
+        //TODO: remember the last type selected when the radio button goes back and forth
         //https://stackoverflow.com/questions/22943045/why-oncheckedchanged-for-radiobutton-doesnt-get-raised-in-android
         RadioGroup typeRadioGroup = (RadioGroup) findViewById(R.id.craftType);
         typeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -85,6 +85,8 @@ public class AddNeedleActivity extends AppCompatActivity {
         setTypeSpinner(R.array.all_needle_type_choices);
 
         //SizeUnit RadioButton
+        //The size options in the size spinner update according to which radio button is selected
+        //TODO: align the us and metric choices so if a user selects a metric option and changes to us, the equivalent option is already selected.
         //https://stackoverflow.com/questions/22943045/why-oncheckedchanged-for-radiobutton-doesnt-get-raised-in-android
         RadioGroup sizeUnitRadioGroup = (RadioGroup) findViewById(R.id.needleSizeUnit);
         sizeUnitRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
