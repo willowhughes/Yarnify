@@ -21,7 +21,7 @@ public class RequestTest {
     @Test
     public void getResponseToPojoTest() {
         Request request =
-                new Request("patterns.json?ids=1335913");
+                new Request("patterns.json?ids=" + "1335913");
 
         ToPojo toPojo =
                 new ToPojo();
@@ -29,12 +29,12 @@ public class RequestTest {
         ResponsePatternList ac = toPojo.fromJSONSimple(request.getResponse());
 
 
-        assertNotNull(ac.getPatterns().getPattern());
+        assertNotNull(ac.getPatterns().getPatternAttributes());
 
         //Shows that ToPojo is deserializing into ResponsePatternList and ResponsePattern correctly
         //Next steps would be to
         //      How to get and set serialized name of pattern...
         //      create more accurate classes and work through them
-        assertEquals("test", ac.getPatterns().getPattern().get("gauge"));
+        assertEquals("test", ac.getPatterns().getPatternAttributes().getTitle());
     }
 }
