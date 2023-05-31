@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -31,6 +32,7 @@ import com.example.yarnify.R;
 
 public class AddNeedleActivity extends AppCompatActivity {
     private Context context = this;
+    private Button saveNeedleButton;
     private String type;
     private String craft;
     private int metric;
@@ -109,6 +111,15 @@ public class AddNeedleActivity extends AppCompatActivity {
         });
 
         setSizeSpinner(R.array.needle_size_metric_choices);
+
+        saveNeedleButton = findViewById(R.id.saveNeedleButton);
+        saveNeedleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        }
+        );
     }
 
     /*
