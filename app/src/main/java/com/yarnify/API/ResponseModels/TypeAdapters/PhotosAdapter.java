@@ -4,7 +4,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import com.yarnify.API.ResponseModels.ResponsePatternAttributesPhotos;
+import com.yarnify.API.ResponseModels.ResponsePatternAttributesPhoto;
 
 import java.io.IOException;
 
@@ -14,15 +14,15 @@ import java.io.IOException;
 // dynamic pattern ids
 
 
-public class PhotosAdapter extends TypeAdapter<ResponsePatternAttributesPhotos> {
+public class PhotosAdapter extends TypeAdapter<ResponsePatternAttributesPhoto> {
     @Override
-    public void write(JsonWriter out, ResponsePatternAttributesPhotos value) throws IOException {
+    public void write(JsonWriter out, ResponsePatternAttributesPhoto value) throws IOException {
 
     }
 
     @Override
-    public ResponsePatternAttributesPhotos read(JsonReader in) throws IOException {
-        ResponsePatternAttributesPhotos photos = new ResponsePatternAttributesPhotos();
+    public ResponsePatternAttributesPhoto read(JsonReader in) throws IOException {
+        ResponsePatternAttributesPhoto photos = new ResponsePatternAttributesPhoto();
         in.beginObject();
         String fieldname = null;
 
