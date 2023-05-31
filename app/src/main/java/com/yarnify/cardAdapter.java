@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,7 @@ public class cardAdapter extends RecyclerView.Adapter<cardAdapter.exampleViewHol
 
             @Override
             public void onError(Exception e) {
-                // Handle error case
+                Log.d("adapter", "image couldn't load");
             }
         });
         holder.mTextView1.setText(currentItem.getTitle());
