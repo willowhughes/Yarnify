@@ -6,7 +6,7 @@ android:id="@+id/Rela"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:scrollbars="vertical"
-tools:context="com.yarnify.ui.home.HomeFragment">
+tools:context="com.yarnify.fragments.home.HomeFragment">
 
 
 <androidx.recyclerview.widget.RecyclerView
