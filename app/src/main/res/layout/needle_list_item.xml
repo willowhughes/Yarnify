@@ -26,10 +26,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="32dp"
             android:text="Knitting Needle"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintLeft_toRightOf="@id/needleItemSize" />
 
         <TextView
             android:id="@+id/needleItemSize"
@@ -38,10 +38,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="32dp"
             android:text="Size 10"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/needleItemCraft" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/needleItemLength"
             android:layout_width="wrap_content"
@@ -49,11 +49,11 @@
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="10dp"
             android:text="10&quot;"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/needleItemCraft"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintLeft_toRightOf="@id/needleItemType" />
 
         <TextView
             android:id="@+id/needleItemType"
@@ -62,11 +62,11 @@
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="10dp"
             android:text="Straight"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/needleItemSize"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/needleItemLength" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/needleItemQtyText"
