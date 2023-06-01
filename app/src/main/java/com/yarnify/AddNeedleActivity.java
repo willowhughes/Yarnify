@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -36,12 +37,11 @@ import com.yarnify.viewmodel.NeedleViewModel;
 public class AddNeedleActivity extends AppCompatActivity {
     private Context context = this;
     private Button saveNeedleButton;
+    private EditText lengthText;
     private NeedleViewModel needleViewModel;
     private Needle needle;
-
     private String craft, type, us;
     private double metric;
-
     private int length;
     private boolean isHook, metricUnits;
 
@@ -122,12 +122,20 @@ public class AddNeedleActivity extends AppCompatActivity {
 
         setSizeSpinner(R.array.needle_size_metric_choices);
 
+        lengthText = (EditText) findViewById(R.id.needleLength);
+
+        //When the save button is clicked, create an instance of a Needle, save it in the
+        //database, and return to the last activity.
         saveNeedleButton = findViewById(R.id.saveNeedleButton);
         saveNeedleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //String type, String craft, int metric, boolean isHook,
-                //String us, int length, String brand, String material, int qty)
+                //https://www.geeksforgeeks.org/numberformatexception-in-java-with-examples/
+                try {
+                    length = Integer.parseInt(lengthText.getText().toString());
+                } catch (NumberFormatException e) {
+                    Log.e("NumberFormatException", e.toString());
+                }
                 String brand = "TBD";
                 String material = "TBD";
                 needle = new Needle(type, craft, metric, isHook, us, length, brand,
