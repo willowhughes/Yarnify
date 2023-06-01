@@ -21,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import androidx.core.view.WindowCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -29,13 +30,19 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.yarnify.databinding.ActivityAddNeedleBinding;
 
 import com.example.yarnify.R;
+import com.yarnify.model.Needle;
+import com.yarnify.viewmodel.NeedleViewModel;
 
 public class AddNeedleActivity extends AppCompatActivity {
     private Context context = this;
     private Button saveNeedleButton;
+    private NeedleViewModel needleViewModel;
+    private Needle needle;
 
     private String craft, type, us;
-    private int metric, length;
+    private double metric;
+
+    private int length;
     private boolean isHook, metricUnits;
 
 
@@ -43,6 +50,7 @@ public class AddNeedleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_needle);
+        needleViewModel = new ViewModelProvider(this).get(NeedleViewModel.class);
         setBackButton();
 
         //Type RadioButton
@@ -118,6 +126,13 @@ public class AddNeedleActivity extends AppCompatActivity {
         saveNeedleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //String type, String craft, int metric, boolean isHook,
+                //String us, int length, String brand, String material, int qty)
+                String brand = "TBD";
+                String material = "TBD";
+                needle = new Needle(type, craft, metric, isHook, us, length, brand,
+                        material, 1);
+                needleViewModel.addNeedle(needle);
                 finish();
             }
         }
@@ -164,8 +179,11 @@ public class AddNeedleActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(metricUnits){
                     Log.i("Metric Units are", (String) parent.getItemAtPosition(position));
+                    String metricSelection = (String) parent.getItemAtPosition(position);
+                    metric = Double.parseDouble(metricSelection);
                 } else {
                     Log.i("US Units are", (String) parent.getItemAtPosition(position));
+                    us = parent.getItemAtPosition(position).toString();
                 }
             }
             @Override
