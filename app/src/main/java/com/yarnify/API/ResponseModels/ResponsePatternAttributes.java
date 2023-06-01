@@ -14,6 +14,7 @@ public class ResponsePatternAttributes {
     private ResponseAttributeCraft craft;
     private ResponsePatternAuthor pattern_author;
     private ArrayList<ResponsePatternAttributesPhoto> photos;
+    private String permalink;
 
     public String getTitle() {
         return title;
@@ -30,4 +31,6 @@ public class ResponsePatternAttributes {
     public ArrayList<ResponsePatternAttributesPhoto> getPhotos() {
         return photos;
     }
+
+    public String getPermalink() { return "https://www.ravelry.com/patterns/library/" + permalink; }
 }
