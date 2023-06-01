@@ -1,5 +1,7 @@
 package com.yarnify;
 
+import static android.view.View.INVISIBLE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -28,8 +30,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.yarnify.databinding.ActivityNeedleListBinding;
 
 import com.example.yarnify.R;
 import com.yarnify.model.Needle;
@@ -75,6 +75,7 @@ public class NeedleListActivity extends AppCompatActivity {
                 allNeedles.addAll(needles);
                 Log.d("saved needles amount", String.valueOf(allNeedles.size()));
                 recyclerView.setAdapter(new NeedleAdapter(allNeedles));
+                //https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
         });
@@ -122,16 +123,19 @@ public class NeedleListActivity extends AppCompatActivity {
 
         public void bind (Needle needle) {
             //Craft depends on knit vs. crochet
-            if(needle.getCraft() == "knit"){
+            if(needle.getCraft().equals("knitting")){
                 craftText.setText("Knitting Needle");
             } else {
                 craftText.setText("Crochet Hook");
             }
             //Size depends on metric vs US
-            if(needle.getUs() == null){
-                sizeText.setText("Size " + needle.getMetric() + " mm");
+            if(needle.getMetric() > 0){
+                sizeText.setText(needle.getMetric() + " mm");
             } else {
-                sizeText.setText("Size " + needle.getUs());
+                sizeText.setText("US " + needle.getUs());
+            }
+            if(needle.getLength() <= 0){
+                lengthText.setVisibility(INVISIBLE);
             }
             lengthText.setText(needle.getLength()+ "\"");
             typeText.setText(needle.getType());
