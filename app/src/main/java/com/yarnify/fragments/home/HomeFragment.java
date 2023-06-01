@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
 
         //api pattern for testing. Turns api url to pattern object and adds to list to be displayed
         exampleList.add(RequestToPattern.toPatternByUrl(url + "1335913"));
+        //exampleList.add(RequestToPattern.toPatternByUrl(url + "1338190"));
 
         //hardcoded example pattern objects
         exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/nawatramani/926341990/Making_Waves_4_small2.jpg", "Making Waves", "Nita Awatramani", "Knitting", "https://www.ravelry.com/patterns/library/making-waves-31", 0));
