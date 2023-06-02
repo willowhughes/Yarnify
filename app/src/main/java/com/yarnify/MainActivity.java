@@ -36,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //hides title
         setUpBottomNav();
 
-
-        //this can be used to nuke the pattern table
-        //patternViewModel = new ViewModelProvider(this).get(PatternViewModel.class);
-        //patternViewModel.deleteAllPatterns();
         networkExecutorService.execute(() -> {
             Request request = new Request("patterns.json?ids=1335913");
         });
