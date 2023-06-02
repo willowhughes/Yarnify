@@ -15,6 +15,8 @@ public class ResponsePatternAttributes {
     private ResponsePatternAuthor pattern_author;
     private ArrayList<ResponsePatternAttributesPhoto> photos;
     private String permalink;
+    private int yardage;
+    private int yardage_max;
 
     public String getTitle() {
         return title;
@@ -32,5 +34,9 @@ public class ResponsePatternAttributes {
         return photos;
     }
 
-    public String getPermalink() { return "https://www.ravelry.com/patterns/library/" + permalink; }
+    public String getPermalink() { return permalink; }
+
+    public int getMinYardage() { return yardage; }
+
+    public int getMaxYardage() { return yardage_max; }
 }

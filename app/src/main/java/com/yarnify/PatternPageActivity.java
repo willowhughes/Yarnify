@@ -64,7 +64,7 @@ public class PatternPageActivity extends AppCompatActivity {
         text2.setText("by " + pat.getCreator());
         text3.setText("Craft: " + pat.getCraft());
         text4.setText("Pattern's URL: " + pat.getURL());
-        text5.setText("Total Yardage: " + pat.getTotalYardage());
+        text5.setText("Yardage: " + pat.getMinYardage() + " - " + pat.getMaxYardage() + " yards");
 
         //observes whether this pattern has been saved or not and updates the saved button's text as well as the isSaved boolean
         LiveData<Integer> patternCountLiveData = patternViewModel.getPatternCountLiveData(pat.getTitle(), pat.getCreator());

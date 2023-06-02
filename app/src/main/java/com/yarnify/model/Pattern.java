@@ -39,8 +39,11 @@ public class Pattern implements Parcelable {
     @ColumnInfo(name="patternURL")
     private String mURL;
 
-    @ColumnInfo(name="totalYardage")
-    private int mTotalYardage;
+    @ColumnInfo(name="minYardage")
+    private int mMinYardage;
+
+    @ColumnInfo(name="maxYardage")
+    private int mMaxYardage;
 
     //TODO
 
@@ -48,14 +51,19 @@ public class Pattern implements Parcelable {
 
     //FK: pattern_needle_sizes
 
+    public Pattern() {
+        // Empty constructor required by Room and Parcelable
+    }
+
     // CONSTRUCTOR
-    public Pattern(String imageResource, @NonNull String title, @NonNull String creator, String craft, String mURL, int totalYardage) {
-        this.mImageResource = imageResource;
+    public Pattern(String image, @NonNull String title, @NonNull String creator, String craft, String patternURL, int minYardage, int maxYardage) {
+        this.mImageResource = image;
         this.mTitle = title;
         this.mCreator = creator;
         this.mCraft = craft;
-        this.mURL = mURL;
-        this.mTotalYardage = totalYardage;
+        this.mURL = patternURL;
+        this.mMinYardage = minYardage;
+        this.mMaxYardage = maxYardage;
         this.mUpdateTime = System.currentTimeMillis();
     }
 
@@ -85,8 +93,11 @@ public class Pattern implements Parcelable {
     public String getURL() { return mURL; }
     public void setURL(String URL) { this.mURL = URL; }
 
-    public int getTotalYardage() { return mTotalYardage; }
-    public void setTotalYardage(int totalYardage) { this.mTotalYardage = totalYardage; }
+    public int getMinYardage() { return mMinYardage; }
+    public void setMinYardage(int minYardage) { this.mMinYardage = minYardage; }
+
+    public int getMaxYardage() { return mMaxYardage; }
+    public void setMaxYardage(int maxYardage) { this.mMaxYardage = maxYardage; }
 
 
 
@@ -99,7 +110,8 @@ public class Pattern implements Parcelable {
         mCreator = in.readString();
         mCraft = in.readString();
         mURL = in.readString();
-        mTotalYardage = in.readInt();
+        mMinYardage = in.readInt();
+        mMaxYardage = in.readInt();
     }
 
     public static final Parcelable.Creator<Pattern> CREATOR = new Parcelable.Creator<Pattern>() {
@@ -126,7 +138,8 @@ public class Pattern implements Parcelable {
         parcel.writeString(mCreator);
         parcel.writeString(mCraft);
         parcel.writeString(mURL);
-        parcel.writeInt(mTotalYardage);
+        parcel.writeInt(mMinYardage);
+        parcel.writeInt(mMaxYardage);
     }
 }
 
