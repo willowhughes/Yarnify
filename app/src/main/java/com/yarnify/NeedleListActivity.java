@@ -4,6 +4,7 @@ import static android.view.View.INVISIBLE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,28 +16,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
-import android.view.ContextMenu;
+
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import androidx.core.view.WindowCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yarnify.R;
 import com.yarnify.model.Needle;
-import com.yarnify.model.Pattern;
 import com.yarnify.viewmodel.NeedleViewModel;
 
 import java.util.ArrayList;
@@ -103,13 +96,38 @@ public class NeedleListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull NeedleHolder holder, int position){
             Needle needle = needleList.get(position);
-            holder.bind(needle);
+            holder.bind(needle, new AllNeedlesLongClickListener());
+            holder.itemView.setTag(R.string.id_tag, needle.getId());
             //holder.itemView.setTag("id", needle.getId());
         }
 
         @Override
         public int getItemCount() {
             return allNeedles.size();
+        }
+
+        public class AllNeedlesLongClickListener implements View.OnLongClickListener{
+
+            @Override
+            public boolean onLongClick(View v) {
+
+                PopupMenu popupMenu = new PopupMenu(context, v);
+
+                popupMenu.inflate(R.menu.supply_long_click_menu);
+
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    int itemId = item.getItemId();
+
+                    if (itemId == R.id.deleteItem) {
+
+                        needleViewModel.deleteNeedle((long) v.getTag(R.string.id_tag));
+                        return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
+                return false;
+            }
         }
     }
 
@@ -127,7 +145,7 @@ public class NeedleListActivity extends AppCompatActivity {
         }
 
         //This method takes the info stored in the Needle and binds it view elements
-        public void bind (Needle needle) {
+        public void bind (Needle needle, NeedleAdapter.AllNeedlesLongClickListener listener) {
             //Craft depends on knit vs. crochet
             if(needle.getCraft().equals("knitting")){
                 craftText.setText("Knitting Needle");
@@ -146,6 +164,8 @@ public class NeedleListActivity extends AppCompatActivity {
             lengthText.setText(needle.getLength()+ "\"");
             typeText.setText(needle.getType());
             qtyText.setText("Qty: " + needle.getQty());
+
+            itemView.setOnLongClickListener(listener);
         }
     }
 
