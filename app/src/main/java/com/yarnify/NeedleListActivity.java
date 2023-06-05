@@ -16,10 +16,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.core.view.WindowCompat;
@@ -73,7 +76,6 @@ public class NeedleListActivity extends AppCompatActivity {
             if (needles != null){
                 allNeedles.clear();
                 allNeedles.addAll(needles);
-                Log.d("saved needles amount", String.valueOf(allNeedles.size()));
                 recyclerView.setAdapter(new NeedleAdapter(allNeedles));
                 //https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -81,6 +83,8 @@ public class NeedleListActivity extends AppCompatActivity {
         });
 
     }
+
+    //The NeedleAdapter class assists with populating the RecyclerView
     private class NeedleAdapter extends RecyclerView.Adapter<NeedleHolder>{
 
         private final List<Needle> needleList;
@@ -112,6 +116,7 @@ public class NeedleListActivity extends AppCompatActivity {
     private static class NeedleHolder extends RecyclerView.ViewHolder {
         private final TextView craftText, sizeText, lengthText, typeText, qtyText;
 
+        //This method identifies what UI elements will "hold" the Needle data
         public NeedleHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.from(parent.getContext()).inflate(R.layout.needle_list_item, parent, false));
             craftText = itemView.findViewById(R.id.needleItemCraft);
@@ -121,6 +126,7 @@ public class NeedleListActivity extends AppCompatActivity {
             qtyText = itemView.findViewById(R.id.needleItemQtyText);
         }
 
+        //This method takes the info stored in the Needle and binds it view elements
         public void bind (Needle needle) {
             //Craft depends on knit vs. crochet
             if(needle.getCraft().equals("knitting")){
