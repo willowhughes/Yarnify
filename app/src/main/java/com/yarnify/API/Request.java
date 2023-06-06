@@ -40,7 +40,8 @@ public class Request {
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url("https://api.ravelry.com/" + url)
                 .method("GET", null)
-                .addHeader("Authorization", API_KEY)
+                //.addHeader("Authorization", API_KEY)
+                .addHeader("Authorization", "Basic cmVhZC1lZTgzYjdmMWNlMmE0ZjQ1YWFmOGQxYTkwNzUwMGM2ZDpWWUFRc0M4VTYyN1ZUNUl1UHY5eS9ZdVFEVWJIUVpTL1h0aXFJNVRi")
                 .build();
         try {
             okhttp3.Response response = client.newCall(request).execute();
