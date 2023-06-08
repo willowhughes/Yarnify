@@ -1,8 +1,6 @@
 package com.yarnify.API.ResponseUtilities;
 
 import com.yarnify.API.Request;
-import com.yarnify.API.ResponseModels.ResponsePatternList;
-import com.yarnify.API.ResponseUtilities.ToPojo;
 import com.yarnify.model.Pattern;
 
 import org.json.JSONArray;
@@ -13,11 +11,14 @@ import java.util.ArrayList;
 
 public final class RequestToPattern {
 
-    private RequestToPattern() {
+    public RequestToPattern() {
         // Private constructor to prevent instantiation
     }
 
-    public ArrayList<Pattern> parsePatternsFromJson(String jsonString) throws JSONException {
+    public ArrayList<Pattern> parsePatternsFromJson(String url) throws JSONException {
+
+        Request request = new Request(url);
+        String jsonString = request.getResponse();
         ArrayList<Pattern> patterns = new ArrayList<>();
 
         JSONObject response = new JSONObject(jsonString);
