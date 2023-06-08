@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.yarnify.databinding.FragmentHomeBinding;
-import com.yarnify.API.ResponseUtilities.RequestToPattern;
+import com.yarnify.API.ResponseUtilities.UrlToPattern;
 import com.yarnify.cardAdapter;
 import com.yarnify.model.Pattern;
-import com.yarnify.viewmodel.PatternViewModel;
 
 import org.json.JSONException;
 
@@ -25,7 +24,6 @@ public class HomeFragment extends Fragment {
 
     //binding is an instance of the auto-generated FragmentHomeBinding class, which is used to bind the layout XML elements to their corresponding Java objects.
     private FragmentHomeBinding binding;
-    private PatternViewModel patternViewModel;
 
     ArrayList<Pattern> exampleList = new ArrayList<>(); //array of pattern objects
 
@@ -39,9 +37,11 @@ public class HomeFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        RequestToPattern requestToPattern = new RequestToPattern();
+        UrlToPattern urlToPattern = new UrlToPattern();
         try {
-            exampleList = requestToPattern.parsePatternsFromJson("patterns/search.json?page_size=100");
+            //featured page with 100 patterns I guess?
+            exampleList = urlToPattern.UrlToPatternList("patterns/search.json?page_size=100");
+            //exampleList = urlToPattern.UrlToPatternList("patterns/search.json?query=knit");
             // Use the patterns list as needed
         } catch (JSONException e) {
             e.printStackTrace();
@@ -50,10 +50,10 @@ public class HomeFragment extends Fragment {
 
 
         //hardcoded example pattern objects
-        exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/nawatramani/926341990/Making_Waves_4_small2.jpg", "Making Waves", "Nita Awatramani", "Knitting", "https://www.ravelry.com/patterns/library/making-waves-31", 0, 0));
+        /*exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/nawatramani/926341990/Making_Waves_4_small2.jpg", "Making Waves", "Nita Awatramani", "Knitting", "https://www.ravelry.com/patterns/library/making-waves-31", 0, 0));
         exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/Finnceburk/926533726/IMG_9809_medium.jpg", "Dragon Derek", "Finn Burke", "Crochet", "https://www.ravelry.com/patterns/library/dragon-derek", 383, 0));
         exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/mongaknit/926461293/20230513_1431102_small2.png", "DDuDDu", "mongaknit kang", "\n" +
-                "Knitting", "https://www.ravelry.com/patterns/library/dduddu", 0, 0));
+                "Knitting", "https://www.ravelry.com/patterns/library/dduddu", 0, 0));*/
 
 
         setUpRecyclerView(); //method initializes and sets the recyclerview, adapter, and layout manager
