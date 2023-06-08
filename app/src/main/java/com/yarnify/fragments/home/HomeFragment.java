@@ -2,6 +2,7 @@ package com.yarnify.fragments.home;
 
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.yarnify.databinding.FragmentHomeBinding;
+import com.yarnify.API.Request;
+import com.yarnify.API.ResponseModels.ResponsePatternList;
 import com.yarnify.API.ResponseUtilities.RequestToPattern;
+import com.yarnify.API.ResponseUtilities.ToPojo;
 import com.yarnify.cardAdapter;
 import com.yarnify.model.Pattern;
 import com.yarnify.viewmodel.PatternViewModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -27,7 +36,6 @@ public class HomeFragment extends Fragment {
     private RequestToPattern requestToPattern;
 
     ArrayList<Pattern> exampleList = new ArrayList<>(); //array of pattern objects
-    private String url = "patterns.json?ids=";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -39,11 +47,16 @@ public class HomeFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        Request request = new Request("patterns/search.json?page_size=100");
+        String s = request.getResponse();
+        try {
+            exampleList = parsePatternsFromJson(s);
+            // Use the patterns list as needed
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // Handle the exception or show an error message
+        }
 
-        //api pattern for testing. Turns api url to pattern object and adds to list to be displayed
-        exampleList.add(RequestToPattern.toPatternByUrl(url + "1335913"));
-        exampleList.add(RequestToPattern.toPatternByUrl(url + "1337254"));
-        exampleList.add(RequestToPattern.toPatternByUrl(url + "1338190"));
 
         //hardcoded example pattern objects
         exampleList.add(new Pattern("https://images4-f.ravelrycache.com/uploads/nawatramani/926341990/Making_Waves_4_small2.jpg", "Making Waves", "Nita Awatramani", "Knitting", "https://www.ravelry.com/patterns/library/making-waves-31", 0, 0));
@@ -72,5 +85,32 @@ public class HomeFragment extends Fragment {
 
         RecyclerView.Adapter mAdapter = new cardAdapter(exampleList);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public ArrayList<Pattern> parsePatternsFromJson(String jsonString) throws JSONException {
+        ArrayList<Pattern> patterns = new ArrayList<>();
+
+        JSONObject response = new JSONObject(jsonString);
+        JSONArray patternArray = response.getJSONArray("patterns");
+
+        for (int i = 0; i < patternArray.length(); i++) {
+            JSONObject patternObject = patternArray.getJSONObject(i);
+
+            // Extract pattern data from the JSON object
+            long id = patternObject.getLong("id");
+            String image = patternObject.getJSONObject("first_photo").getString("medium_url");
+            String title = patternObject.getString("name");
+            String creator = patternObject.getJSONObject("designer").getString("name");
+            String craft = "knitting";  // Assuming a default value
+            String patternURL = "https://www.ravelry.com/patterns/library/" + patternObject.getString("permalink");
+            int minYardage = 0;  // Assuming a default value
+            int maxYardage = 0;  // Assuming a default value
+
+            // Create a new Pattern object with the extracted data
+            Pattern pattern = new Pattern(image, title, creator, craft, patternURL, minYardage, maxYardage);
+            patterns.add(pattern);
+        }
+
+        return patterns;
     }
 }

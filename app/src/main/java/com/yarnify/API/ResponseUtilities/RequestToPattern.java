@@ -5,27 +5,42 @@ import com.yarnify.API.ResponseModels.ResponsePatternList;
 import com.yarnify.API.ResponseUtilities.ToPojo;
 import com.yarnify.model.Pattern;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public final class RequestToPattern {
 
     private RequestToPattern() {
         // Private constructor to prevent instantiation
     }
 
-    public static Pattern toPatternByUrl(String url) {
-        Request request = new Request(url);
-        ToPojo toPojo = new ToPojo();
-        ResponsePatternList ac = toPojo.fromJSONSimple(request.getResponse());
+    public ArrayList<Pattern> parsePatternsFromJson(String jsonString) throws JSONException {
+        ArrayList<Pattern> patterns = new ArrayList<>();
 
-        // I can make cleaner methods for these, but this is an example of how the classes
-        // are deserialize and accessed
-        String photoURL = ac.getPatterns().getPatternAttributes().getPhotos().get(0).getMedium_url();
-        String title = ac.getPatterns().getPatternAttributes().getTitle();
-        String name = ac.getPatterns().getPatternAttributes().getPattern_author().getName();
-        String craft = ac.getPatterns().getPatternAttributes().getCraft().getName();
-        String permalink = "https://www.ravelry.com/patterns/library/" + ac.getPatterns().getPatternAttributes().getPermalink();
-        int minYardage = ac.getPatterns().getPatternAttributes().getMinYardage();
-        int maxYardage = ac.getPatterns().getPatternAttributes().getMaxYardage();
+        JSONObject response = new JSONObject(jsonString);
+        JSONArray patternArray = response.getJSONArray("patterns");
 
-        return new Pattern(photoURL, title, name, craft, permalink, minYardage, maxYardage);
+        for (int i = 0; i < patternArray.length(); i++) {
+            JSONObject patternObject = patternArray.getJSONObject(i);
+
+            // Extract pattern data from the JSON object
+            long id = patternObject.getLong("id");
+            String image = patternObject.getJSONObject("first_photo").getString("medium_url");
+            String title = patternObject.getString("name");
+            String creator = patternObject.getJSONObject("designer").getString("name");
+            String craft = "knitting";  // Assuming a default value
+            String patternURL = "https://www.ravelry.com/patterns/library/" + patternObject.getString("permalink");
+            int minYardage = 0;  // Assuming a default value
+            int maxYardage = 0;  // Assuming a default value
+
+            // Create a new Pattern object with the extracted data
+            Pattern pattern = new Pattern(image, title, creator, craft, patternURL, minYardage, maxYardage);
+            patterns.add(pattern);
+        }
+
+        return patterns;
     }
 }
