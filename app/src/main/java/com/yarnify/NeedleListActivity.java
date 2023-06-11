@@ -71,7 +71,6 @@ public class NeedleListActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
         });
-
     }
 
     //The NeedleAdapter class assists with populating the RecyclerView
@@ -95,7 +94,6 @@ public class NeedleListActivity extends AppCompatActivity {
             Needle needle = needleList.get(position);
             holder.bind(needle, new AllNeedlesLongClickListener());
             holder.itemView.setTag(R.string.id_tag, needle.getId());
-            //holder.itemView.setTag("id", needle.getId());
         }
 
         @Override
