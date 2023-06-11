@@ -52,9 +52,6 @@ public class NeedleListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Enter New Needle or Hook", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
                 Intent intent = new Intent(context, AddNeedleActivity.class);
                 startActivity(intent);
             }

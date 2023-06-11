@@ -4,10 +4,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+
 import com.example.yarnify.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.yarnify.model.Yarn;
 import com.yarnify.viewmodel.YarnViewModel;
 
@@ -24,6 +29,16 @@ public class YarnListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yarn_list);
         setBackButton();
+
+        //The FAB button brings the user to a new screen to enter a new yarn
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AddYarnActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void setBackButton() {
         // Get the support action bar
