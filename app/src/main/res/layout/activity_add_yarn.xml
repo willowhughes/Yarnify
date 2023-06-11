@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_purple"
     tools:context="com.yarnify.AddYarnActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -63,7 +63,6 @@
                     android:layout_height="wrap_content"
                     android:text="Yards"
                     style="@style/SmallRadioButtonStyle" />
-                <!--android:onClick="onLengthUnitsSelected"-->
 
                 <RadioButton
                     android:id="@+id/meters"
@@ -71,7 +70,6 @@
                     android:layout_height="wrap_content"
                     android:text="Meters"
                     style="@style/SmallRadioButtonStyle" />
-                <!--android:onClick="onLengthUnitsSelected"-->
             </RadioGroup>
 
             <EditText
@@ -98,7 +96,6 @@
                     android:layout_height="wrap_content"
                     android:text="Grams"
                     style="@style/SmallRadioButtonStyle" />
-                <!--android:onClick="onWeightUnitsSelected"-->
 
                 <RadioButton
                     android:id="@+id/ounces"
@@ -106,7 +103,6 @@
                     android:layout_height="wrap_content"
                     android:text="Ounces"
                     style="@style/SmallRadioButtonStyle" />
-                <!--android:onClick="onWeightUnitsSelected"-->
             </RadioGroup>
 
             <Spinner
@@ -127,12 +123,12 @@
                 android:layout_marginBottom="15dp" />
 
             <Button
-                android:id="@+id/saveNeedleButton"
+                android:id="@+id/saveYarnButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/ButtonStyle"
                 android:text="Save"
-                app:layout_constraintTop_toBottomOf="@+id/needleLength"/>
+                app:layout_constraintTop_toBottomOf="@+id/colorFamilySpinner"/>
 
         </LinearLayout>
     </ScrollView>

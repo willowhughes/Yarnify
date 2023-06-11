@@ -55,9 +55,9 @@ public class YarnListActivity extends AppCompatActivity {
             if (yarns != null){
                 allYarns.clear();
                 allYarns.addAll(yarns);
-                recyclerView.setAdapter(new YarnAdapter(allYarns));
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(new YarnAdapter(allYarns));
         });
     }
 

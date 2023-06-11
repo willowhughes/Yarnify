@@ -66,10 +66,11 @@ public class NeedleListActivity extends AppCompatActivity {
             if (needles != null){
                 allNeedles.clear();
                 allNeedles.addAll(needles);
-                recyclerView.setAdapter(new NeedleAdapter(allNeedles));
-                //https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
             }
+            //https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(new NeedleAdapter(allNeedles));
         });
     }
 
