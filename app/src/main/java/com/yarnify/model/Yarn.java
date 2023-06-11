@@ -20,8 +20,6 @@ public class Yarn {
     @ColumnInfo(name = "name")
     private String mName;
 
-    //thread, cobweb, lace, light fingering, fingering, sport, dk, worsted,
-        //aran, bulky, super bulky, jumbo
     @ColumnInfo(name = "yarnWeight")
     private String mYarnWeight;
 
@@ -49,6 +47,7 @@ public class Yarn {
     private String mDyeLot;
 
     //CONSTRUCTOR
+    //TODO: take out colorway - it should be with patterns, not yarn
     public Yarn(@NonNull String name, String yarnWeight, String lengthUnits,
                 int totalLength, String weightUnits, int totalWeight, String colorFamily,
                 String colorway, String dyeLot) {
