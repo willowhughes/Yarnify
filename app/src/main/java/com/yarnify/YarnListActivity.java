@@ -132,6 +132,8 @@ public class YarnListActivity extends AppCompatActivity {
             } else {
                 yarnQtyText.setText(yarn.getTotalWeight() + " " + yarn.getWeightUnits());
             }
+
+            itemView.setOnLongClickListener(listener);
         }
     }
     public void setBackButton() {
