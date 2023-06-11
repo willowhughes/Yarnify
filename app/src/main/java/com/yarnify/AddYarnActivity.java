@@ -1,0 +1,152 @@
+package com.yarnify;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+
+import com.example.yarnify.R;
+import com.yarnify.model.Yarn;
+import com.yarnify.viewmodel.YarnViewModel;
+
+public class AddYarnActivity extends AppCompatActivity {
+    private Context context = this;
+    private YarnViewModel yarnViewModel;
+    private Button saveYarnButton;
+    private EditText nameText, totalLengthText, totalWeightText, dyeLotText;
+    private String name, weight, lengthUnits, weightUnits, colorFamily, dyeLot;
+    private int totalLength, totalWeight;
+
+    private Yarn yarn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_yarn);
+        yarnViewModel = new ViewModelProvider(this).get(YarnViewModel.class);
+        setBackButton();
+
+        //Access and assign UI elements
+        //EditText elements
+        nameText = findViewById(R.id.yarnName);
+        totalLengthText = findViewById(R.id.totalLength);
+        totalWeightText = findViewById(R.id.totalWeight);
+        dyeLotText = findViewById(R.id.dyeLot);
+
+        //Spinner elements
+        setSpinner(R.id.yarnWeightSpinner, R.array.yarn_weight_options);
+        setSpinner(R.id.colorFamilySpinner, R.array.color_family_options);
+
+        //RadioGroup elements
+        RadioGroup lengthUnitsRadioGroup = (RadioGroup) findViewById(R.id.lengthUnits);
+        RadioGroup weightUnitsRadioGroup = (RadioGroup) findViewById(R.id.weightUnits);
+
+        //Button elements
+        saveYarnButton = findViewById(R.id.saveYarnButton);
+
+        lengthUnitsRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                //Check which radio button was checked
+                switch(checkedId){
+                    case R.id.yards:
+                        lengthUnits = "yards";
+                        break;
+                    case R.id.meters:
+                        lengthUnits = "meters";
+                        break;
+                }
+                Log.i("length", lengthUnits);
+            }
+        });
+
+        weightUnitsRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                //Check which radio button was checked
+                switch(checkedId){
+                    case R.id.grams:
+                        weightUnits = "grams";
+                        break;
+                    case R.id.ounces:
+                        weightUnits = "ounces";
+                        break;
+                }
+                Log.i("weight", weightUnits);
+            }
+        });
+
+        saveYarnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name = nameText.getText().toString();
+                try {
+                    totalLength = Integer.parseInt(totalLengthText.getText().toString());
+                } catch (NumberFormatException e) {
+                    Log.e("NumberFormatException", e.toString());
+                }
+                try {
+                    totalWeight = Integer.parseInt(totalWeightText.getText().toString());
+                } catch (NumberFormatException e) {
+                    Log.e("NumberFormatException", e.toString());
+                }
+                dyeLot = dyeLotText.getText().toString();
+
+                yarn = new Yarn(name, weight, lengthUnits, totalLength, weightUnits, totalWeight,
+                        colorFamily, "n/a", dyeLot);
+                Log.i("YarnName", yarn.getName());
+                Log.i("Yarn ID", String.valueOf(yarn.getId()));
+
+                yarnViewModel.addYarn(yarn);
+                finish();
+            }
+        });
+    }
+
+    private void setSpinner(int spinnerResourceId, int arrayResourceId) {
+        Spinner spinner = findViewById(spinnerResourceId);
+        int choicesArrayId = arrayResourceId;
+        ArrayAdapter<CharSequence> typeSpinnerAdapter = ArrayAdapter.createFromResource(this,
+                choicesArrayId, android.R.layout.simple_spinner_item);
+        typeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(typeSpinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinnerResourceId == R.id.yarnWeightSpinner){
+                    weight = (String) parent.getItemAtPosition(position);
+                } else if (spinnerResourceId == R.id.colorFamilySpinner) {
+                    colorFamily = (String) parent.getItemAtPosition(position);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    public void setBackButton() {
+        // Get the support action bar
+        ActionBar actionBar = getSupportActionBar();
+        // Set the title
+        actionBar.setTitle("Needles and Hooks");
+        // Enable the back button
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        // Set a custom drawable for the up indicator to change its color
+        Drawable upArrow = getResources().getDrawable(R.drawable.baseline_arrow_back_24);
+        upArrow.setColorFilter(getResources().getColor(R.color.light_gray), PorterDuff.Mode.SRC_ATOP);
+        actionBar.setHomeAsUpIndicator(upArrow);
+    }
+}

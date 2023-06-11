@@ -52,9 +52,6 @@ public class NeedleListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Enter New Needle or Hook", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
                 Intent intent = new Intent(context, AddNeedleActivity.class);
                 startActivity(intent);
             }
@@ -69,12 +66,12 @@ public class NeedleListActivity extends AppCompatActivity {
             if (needles != null){
                 allNeedles.clear();
                 allNeedles.addAll(needles);
-                recyclerView.setAdapter(new NeedleAdapter(allNeedles));
-                //https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            }
-        });
 
+            }
+            //https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(new NeedleAdapter(allNeedles));
+        });
     }
 
     //The NeedleAdapter class assists with populating the RecyclerView
@@ -98,7 +95,6 @@ public class NeedleListActivity extends AppCompatActivity {
             Needle needle = needleList.get(position);
             holder.bind(needle, new AllNeedlesLongClickListener());
             holder.itemView.setTag(R.string.id_tag, needle.getId());
-            //holder.itemView.setTag("id", needle.getId());
         }
 
         @Override
