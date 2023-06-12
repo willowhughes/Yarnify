@@ -5,7 +5,7 @@
     android:id="@+id/Rela"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#463D55"
+    android:background="@color/dark_purple"
     android:scrollbars="vertical"
     tools:context="com.yarnify.fragments.search.SearchFragment">
 
@@ -13,11 +13,9 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Search..."
-        android:theme="@style/CustomSearchView"
-        android:iconifiedByDefault="false"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:iconifiedByDefault="false"
+        android:queryHint="Search..." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -26,6 +24,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_below="@id/searchView"
-        android:background="#463D55" />
+        android:background="@color/dark_purple" />
 
 </RelativeLayout>

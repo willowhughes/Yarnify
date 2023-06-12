@@ -1,17 +1,15 @@
 package com.yarnify.fragments.search;
 
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -41,6 +39,8 @@ public class SearchFragment extends Fragment {
         urlToPattern = new UrlToPattern();
 
         SearchView searchView = binding.searchView;
+        setUpSearchViewColors(searchView);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -91,5 +91,22 @@ public class SearchFragment extends Fragment {
 
         RecyclerView.Adapter mAdapter = new cardAdapter(exampleList);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void setUpSearchViewColors(SearchView searchView) {
+        // Change text color
+        int searchTextViewId = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        EditText searchEditText = searchView.findViewById(searchTextViewId);
+        searchEditText.setTextColor(getResources().getColor(R.color.light_gray));
+
+        // Change icon color
+        int searchIconId = searchView.getContext().getResources().getIdentifier("android:id/search_mag_icon", null, null);
+        ImageView searchIcon = searchView.findViewById(searchIconId);
+        searchIcon.setColorFilter(getResources().getColor(R.color.light_gray));
+
+        // Change clear icon color
+        int closeButtonId = searchView.getContext().getResources().getIdentifier("android:id/search_close_btn", null, null);
+        ImageView closeButton = searchView.findViewById(closeButtonId);
+        closeButton.setColorFilter(getResources().getColor(R.color.light_gray));
     }
 }

@@ -16,8 +16,4 @@
         <item name="android:textColor">@color/light_gray</item>
     </style>
 
-    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
-        <item name="android:textColor">@color/light_gray</item>
-    </style>
-
 </resources>
