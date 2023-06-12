@@ -1,3 +1,12 @@
+/***************************************************************************************
+ * Title: Mobile App Development with Android and Java
+ * Author: Frank McCown, Associate Professor of Computer Science, Harding University
+ * Date: 2018-2022
+ * Code version: Java
+ * Availability: https://www.zybooks.com/catalog/mobile-app-development/
+ *
+ ***************************************************************************************/
+
 package com.yarnify;
 
 import androidx.appcompat.app.ActionBar;
@@ -68,7 +77,6 @@ public class AddYarnActivity extends AppCompatActivity {
                         lengthUnits = "meters";
                         break;
                 }
-                Log.i("length", lengthUnits);
             }
         });
 
@@ -84,7 +92,6 @@ public class AddYarnActivity extends AppCompatActivity {
                         weightUnits = "ounces";
                         break;
                 }
-                Log.i("weight", weightUnits);
             }
         });
 
@@ -106,8 +113,6 @@ public class AddYarnActivity extends AppCompatActivity {
 
                 yarn = new Yarn(name, weight, lengthUnits, totalLength, weightUnits, totalWeight,
                         colorFamily, "n/a", dyeLot);
-                Log.i("YarnName", yarn.getName());
-                Log.i("Yarn ID", String.valueOf(yarn.getId()));
 
                 yarnViewModel.addYarn(yarn);
                 finish();
@@ -115,14 +120,20 @@ public class AddYarnActivity extends AppCompatActivity {
         });
     }
 
+    /*
+     * Sets and updates the Type Spinner to whatever array is appropriate
+     * @params: int spinnerResourceID - the id of which spinner to update
+     * @params: int arrayResourceID - the id of the array of strings for the dropdown
+     */
     private void setSpinner(int spinnerResourceId, int arrayResourceId) {
         Spinner spinner = findViewById(spinnerResourceId);
         int choicesArrayId = arrayResourceId;
-        ArrayAdapter<CharSequence> typeSpinnerAdapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
                 choicesArrayId, android.R.layout.simple_spinner_item);
-        typeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(typeSpinnerAdapter);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            //Depending on the choice made in which spinner, update the appropriate attribute
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(spinnerResourceId == R.id.yarnWeightSpinner){

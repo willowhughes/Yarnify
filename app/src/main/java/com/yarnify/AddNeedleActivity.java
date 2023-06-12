@@ -1,3 +1,12 @@
+/***************************************************************************************
+ * Title: Mobile App Development with Android and Java
+ * Author: Frank McCown, Associate Professor of Computer Science, Harding University
+ * Date: 2018-2022
+ * Code version: Java
+ * Availability: https://www.zybooks.com/catalog/mobile-app-development/
+ *
+ ***************************************************************************************/
+
 package com.yarnify;
 
 import android.content.Context;
@@ -53,10 +62,20 @@ public class AddNeedleActivity extends AppCompatActivity {
         needleViewModel = new ViewModelProvider(this).get(NeedleViewModel.class);
         setBackButton();
 
+        //Type Spinner initially shows all options
+        setTypeSpinner(R.array.all_needle_type_choices);
+
         //Type RadioButton
         //The options in the TypeSpinner are changed depending on which RadioButton is checked
         //TODO: remember the last type selected when the radio button goes back and forth
-        //https://stackoverflow.com/questions/22943045/why-oncheckedchanged-for-radiobutton-doesnt-get-raised-in-android
+        /***************************************************************************************
+         * Title: Why onCheckedChanged() for RadioButton doesn't get raised in android?
+         * Author: joao2fast4u, Blackbelt
+         * Date: April 8, 2014
+         * Code version: Java
+         * Availability: https://stackoverflow.com/questions/22943045/why-oncheckedchanged-for-radiobutton-doesnt-get-raised-in-android
+         *
+         ***************************************************************************************/
         RadioGroup typeRadioGroup = (RadioGroup) findViewById(R.id.craftType);
         typeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -68,6 +87,7 @@ public class AddNeedleActivity extends AppCompatActivity {
                         isHook = false;
                         Log.i("Changed Craft:", craft);
                         setTypeSpinner(R.array.knitting_needle_type_choices);
+                        //Update size options to knitting choices
                         if(metricUnits){
                             setSizeSpinner(R.array.needle_size_metric_choices);
                         } else {
@@ -79,6 +99,7 @@ public class AddNeedleActivity extends AppCompatActivity {
                         isHook = true;
                         Log.i("Changed Craft:", craft);
                         setTypeSpinner(R.array.crochet_hook_type_choices);
+                        //Update size options to crochet choices
                         if(metricUnits){
                             setSizeSpinner(R.array.needle_size_metric_choices);
                         } else {
@@ -88,9 +109,6 @@ public class AddNeedleActivity extends AppCompatActivity {
                 }
             }
         });
-
-        //Type Spinner initially shows all options
-        setTypeSpinner(R.array.all_needle_type_choices);
 
         //SizeUnit RadioButton
         //The size options in the size spinner update according to which radio button is selected
@@ -110,6 +128,7 @@ public class AddNeedleActivity extends AppCompatActivity {
                     case R.id.us:
                         metricUnits = false;
                         Log.i("Changed Units", "us");
+                        //Update US sizes for knit vs. crochet
                         if(isHook){
                             setSizeSpinner(R.array.needle_size_US_crochet_choices);
                         } else {
@@ -130,7 +149,14 @@ public class AddNeedleActivity extends AppCompatActivity {
         saveNeedleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //https://www.geeksforgeeks.org/numberformatexception-in-java-with-examples/
+                /***************************************************************************************
+                 * Title: NumberFormatException in Java with Examples
+                 * Author: hemavatisabu
+                 * Date: February 18, 2022
+                 * Code version: Java
+                 * Availability: https://www.geeksforgeeks.org/numberformatexception-in-java-with-examples/
+                 *
+                 ***************************************************************************************/
                 try {
                     length = Integer.parseInt(lengthText.getText().toString());
                 } catch (NumberFormatException e) {
@@ -171,11 +197,11 @@ public class AddNeedleActivity extends AppCompatActivity {
     }
 
     /*
-     * Sets and updates the Type Spinner to whatever array is appropriate
+     * Sets and updates the Size Spinner to whatever array is appropriate
      * @params: int array ResourceID - the id of the array of strings for the dropdown
      */
     private void setSizeSpinner(int arrayResourceId) {
-        //Spinner for type of needle
+        //Spinner for size of needle
         Spinner unitSpinner = findViewById(R.id.needleSizeSpinner);
         int sizeChoicesArrayId = arrayResourceId;
         ArrayAdapter<CharSequence> sizeSpinnerAdapter = ArrayAdapter.createFromResource(this,
@@ -186,11 +212,9 @@ public class AddNeedleActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(metricUnits){
-                    Log.i("Metric Units are", (String) parent.getItemAtPosition(position));
                     String metricSelection = (String) parent.getItemAtPosition(position);
                     metric = Double.parseDouble(metricSelection);
                 } else {
-                    Log.i("US Units are", (String) parent.getItemAtPosition(position));
                     us = parent.getItemAtPosition(position).toString();
                 }
             }
@@ -229,13 +253,11 @@ public class AddNeedleActivity extends AppCompatActivity {
             case R.id.metric:
                 if (checked){
                     metricUnits = true;
-                    Log.i("Units", "metric");
                 }
                 break;
             case R.id.crochetHook:
                 if (checked){
                     metricUnits = false;
-                    Log.i("Units", "us");
                 }
                 break;
         }

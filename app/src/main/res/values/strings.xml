@@ -1,24 +1,30 @@
+<!-- ***************************************************************************************
+ * Title: Mobile App Development with Android and Java
+ * Author: Frank McCown, Associate Professor of Computer Science, Harding University
+ * Date: 2018-2022
+ * Code version: Java
+ * Availability: https://www.zybooks.com/catalog/mobile-app-development/
+ *
+*************************************************************************************** -->
+
 <resources>
     <string name="app_name">Yarnify</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_needle_list">NeedleListActivity</string>
+    <string name="title_activity_add_needle">AddNeedleActivity</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <!--key tag strings-->
+    <!-- key tag strings -->
     <string name="id_tag">id</string>
 
-    <string name="lorem_ipsum">
-        Lorem ipsum
-    </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <!-- arrays -->
     <string-array name="knitting_needle_type_choices">
         <item>Straight</item>
         <item>Double Pointed</item>
@@ -117,5 +123,4 @@
         <item>yellow-green</item>
         <item>yellow-orange</item>
     </string-array>
-    <string name="title_activity_add_needle">AddNeedleActivity</string>
 </resources>

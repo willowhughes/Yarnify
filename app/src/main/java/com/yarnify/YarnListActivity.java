@@ -1,3 +1,12 @@
+/***************************************************************************************
+ * Title: Mobile App Development with Android and Java
+ * Author: Frank McCown, Associate Professor of Computer Science, Harding University
+ * Date: 2018-2022
+ * Code version: Java
+ * Availability: https://www.zybooks.com/catalog/mobile-app-development/
+ *
+ ***************************************************************************************/
+
 package com.yarnify;
 
 import androidx.annotation.NonNull;
@@ -40,12 +49,9 @@ public class YarnListActivity extends AppCompatActivity {
 
         //The FAB button brings the user to a new screen to enter a new yarn
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AddYarnActivity.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(context, AddYarnActivity.class);
+            startActivity(intent);
         });
 
         RecyclerView recyclerView = findViewById(R.id.yarnRecyclerView);
@@ -56,6 +62,14 @@ public class YarnListActivity extends AppCompatActivity {
                 allYarns.clear();
                 allYarns.addAll(yarns);
             }
+            /***************************************************************************************
+             * Title: Impossible : No layout manager attached; Skipping layout
+             * Author: Jai
+             * Date: June 9, 2017
+             * Code version: Java
+             * Availability: https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
+             *
+             ***************************************************************************************/
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new YarnAdapter(allYarns));
         });
@@ -124,6 +138,8 @@ public class YarnListActivity extends AppCompatActivity {
             yarnDyeLotText.setText(yarn.getDyeLot());
             yarnWeightText.setText(yarn.getYarnWeight());
 
+            //Available yarn, by length and weight show in the same field
+            //Populate the field based on what data exists
             if(yarn.getTotalLength() != 0 && yarn.getTotalWeight() != 0){
                 yarnQtyText.setText(yarn.getTotalLength() + " " + yarn.getLengthUnits()
                    + " - " + yarn.getTotalWeight() + " " + yarn.getWeightUnits());
