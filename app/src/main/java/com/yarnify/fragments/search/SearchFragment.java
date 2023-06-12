@@ -51,7 +51,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // You can perform incremental search here if needed
+                // can perform incremental search here
                 return false;
             }
         });
@@ -69,11 +69,9 @@ public class SearchFragment extends Fragment {
 
     private void performSearch(String query) {
         exampleList.clear();
-
         try {
             exampleList = urlToPattern.UrlToPatternList("patterns/search.json?query=" + query);
             if (exampleList.isEmpty()) {
-                Log.d("Search Frag", "No search results!");
                 Toast.makeText(requireContext(), "No search results! Try different keywords", Toast.LENGTH_SHORT).show();
             } else {
                 setUpRecyclerView();
