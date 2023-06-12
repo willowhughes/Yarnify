@@ -1,16 +1,23 @@
+/***************************************************************************************
+ * Title: Mobile App Development with Android and Java
+ * Author: Frank McCown, Associate Professor of Computer Science, Harding University
+ * Date: 2018-2022
+ * Code version: Java
+ * Availability: https://www.zybooks.com/catalog/mobile-app-development/
+ *
+ ***************************************************************************************/
+
 package com.yarnify;
 
 import static android.view.View.INVISIBLE;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -49,12 +56,9 @@ public class NeedleListActivity extends AppCompatActivity {
 
         //The FAB button brings the user to a new screen to enter another tool
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AddNeedleActivity.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(context, AddNeedleActivity.class);
+            startActivity(intent);
         });
 
         //Set up the RecyclerView
@@ -68,7 +72,14 @@ public class NeedleListActivity extends AppCompatActivity {
                 allNeedles.addAll(needles);
 
             }
-            //https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
+            /***************************************************************************************
+             * Title: Impossible : No layout manager attached; Skipping layout
+             * Author: Jai
+             * Date: June 9, 2017
+             * Code version: Java
+             * Availability: https://stackoverflow.com/questions/37023992/impossible-no-layout-manager-attached-skipping-layout
+             *
+             ***************************************************************************************/
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new NeedleAdapter(allNeedles));
         });
@@ -115,7 +126,6 @@ public class NeedleListActivity extends AppCompatActivity {
                     int itemId = item.getItemId();
 
                     if (itemId == R.id.deleteItem) {
-
                         needleViewModel.deleteNeedle((long) v.getTag(R.string.id_tag));
                         return true;
                     }
@@ -140,7 +150,7 @@ public class NeedleListActivity extends AppCompatActivity {
             qtyText = itemView.findViewById(R.id.needleItemQtyText);
         }
 
-        //This method takes the info stored in the Needle and binds it view elements
+        //This method takes the info stored in the Needle and binds it to view elements
         public void bind (Needle needle, NeedleAdapter.AllNeedlesLongClickListener listener) {
             //Craft depends on knit vs. crochet
             if(needle.getCraft().equals("knitting")){
