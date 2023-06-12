@@ -14,8 +14,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,14 +28,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import androidx.core.view.WindowCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.yarnify.databinding.ActivityAddNeedleBinding;
 
 import com.example.yarnify.R;
 import com.yarnify.model.Needle;
@@ -77,36 +68,31 @@ public class AddNeedleActivity extends AppCompatActivity {
          *
          ***************************************************************************************/
         RadioGroup typeRadioGroup = (RadioGroup) findViewById(R.id.craftType);
-        typeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                //Check which radio button was checked
-                switch (checkedId) {
-                    case R.id.knittingNeedle:
-                        craft = "knitting";
-                        isHook = false;
-                        Log.i("Changed Craft:", craft);
-                        setTypeSpinner(R.array.knitting_needle_type_choices);
-                        //Update size options to knitting choices
-                        if(metricUnits){
-                            setSizeSpinner(R.array.needle_size_metric_choices);
-                        } else {
-                            setSizeSpinner(R.array.needle_size_US_knit_choices);
-                        }
-                        break;
-                    case R.id.crochetHook:
-                        craft = "crochet";
-                        isHook = true;
-                        Log.i("Changed Craft:", craft);
-                        setTypeSpinner(R.array.crochet_hook_type_choices);
-                        //Update size options to crochet choices
-                        if(metricUnits){
-                            setSizeSpinner(R.array.needle_size_metric_choices);
-                        } else {
-                            setSizeSpinner(R.array.needle_size_US_crochet_choices);
-                        }
-                        break;
-                }
+        typeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            //Check which radio button was checked
+            switch (checkedId) {
+                case R.id.knittingNeedle:
+                    craft = "knitting";
+                    isHook = false;
+                    setTypeSpinner(R.array.knitting_needle_type_choices);
+                    //Update size options to knitting choices
+                    if(metricUnits){
+                        setSizeSpinner(R.array.needle_size_metric_choices);
+                    } else {
+                        setSizeSpinner(R.array.needle_size_US_knit_choices);
+                    }
+                    break;
+                case R.id.crochetHook:
+                    craft = "crochet";
+                    isHook = true;
+                    setTypeSpinner(R.array.crochet_hook_type_choices);
+                    //Update size options to crochet choices
+                    if(metricUnits){
+                        setSizeSpinner(R.array.needle_size_metric_choices);
+                    } else {
+                        setSizeSpinner(R.array.needle_size_US_crochet_choices);
+                    }
+                    break;
             }
         });
 
@@ -115,27 +101,22 @@ public class AddNeedleActivity extends AppCompatActivity {
         //TODO: align the us and metric choices so if a user selects a metric option and changes to us, the equivalent option is already selected.
         //https://stackoverflow.com/questions/22943045/why-oncheckedchanged-for-radiobutton-doesnt-get-raised-in-android
         RadioGroup sizeUnitRadioGroup = (RadioGroup) findViewById(R.id.needleSizeUnit);
-        sizeUnitRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                //Check which radio button was checked
-                switch (checkedId) {
-                    case R.id.metric:
-                        metricUnits = true;
-                        Log.i("Changed Units", "metric");
-                        setSizeSpinner(R.array.needle_size_metric_choices);
-                        break;
-                    case R.id.us:
-                        metricUnits = false;
-                        Log.i("Changed Units", "us");
-                        //Update US sizes for knit vs. crochet
-                        if(isHook){
-                            setSizeSpinner(R.array.needle_size_US_crochet_choices);
-                        } else {
-                            setSizeSpinner(R.array.needle_size_US_knit_choices);
-                        }
-                        break;
-                }
+        sizeUnitRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            //Check which radio button was checked
+            switch (checkedId) {
+                case R.id.metric:
+                    metricUnits = true;
+                    setSizeSpinner(R.array.needle_size_metric_choices);
+                    break;
+                case R.id.us:
+                    metricUnits = false;
+                    //Update US sizes for knit vs. crochet
+                    if(isHook){
+                        setSizeSpinner(R.array.needle_size_US_crochet_choices);
+                    } else {
+                        setSizeSpinner(R.array.needle_size_US_knit_choices);
+                    }
+                    break;
             }
         });
 
@@ -146,29 +127,26 @@ public class AddNeedleActivity extends AppCompatActivity {
         //When the save button is clicked, create an instance of a Needle, save it in the
         //database, and return to the last activity.
         saveNeedleButton = findViewById(R.id.saveNeedleButton);
-        saveNeedleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /***************************************************************************************
-                 * Title: NumberFormatException in Java with Examples
-                 * Author: hemavatisabu
-                 * Date: February 18, 2022
-                 * Code version: Java
-                 * Availability: https://www.geeksforgeeks.org/numberformatexception-in-java-with-examples/
-                 *
-                 ***************************************************************************************/
-                try {
-                    length = Integer.parseInt(lengthText.getText().toString());
-                } catch (NumberFormatException e) {
-                    Log.e("NumberFormatException", e.toString());
-                }
-                String brand = "TBD";
-                String material = "TBD";
-                needle = new Needle(type, craft, metric, isHook, us, length, brand,
-                        material, 1);
-                needleViewModel.addNeedle(needle);
-                finish();
+        saveNeedleButton.setOnClickListener(v -> {
+            /***************************************************************************************
+             * Title: NumberFormatException in Java with Examples
+             * Author: hemavatisabu
+             * Date: February 18, 2022
+             * Code version: Java
+             * Availability: https://www.geeksforgeeks.org/numberformatexception-in-java-with-examples/
+             *
+             ***************************************************************************************/
+            try {
+                length = Integer.parseInt(lengthText.getText().toString());
+            } catch (NumberFormatException e) {
+                Log.e("NumberFormatException", e.toString());
             }
+            String brand = "TBD";
+            String material = "TBD";
+            needle = new Needle(type, craft, metric, isHook, us, length, brand,
+                    material, 1);
+            needleViewModel.addNeedle(needle);
+            finish();
         }
         );
     }
@@ -242,7 +220,6 @@ public class AddNeedleActivity extends AppCompatActivity {
                 }
                 break;
         }
-        Log.i("Craft:", craft);
     }
 
     public void onUnitsSelected(View view) {

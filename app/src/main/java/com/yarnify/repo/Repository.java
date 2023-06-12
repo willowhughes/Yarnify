@@ -12,7 +12,6 @@ package com.yarnify.repo;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import com.yarnify.model.Needle;

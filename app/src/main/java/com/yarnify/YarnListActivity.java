@@ -94,7 +94,7 @@ public class YarnListActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getItemCount() { return allYarns.size(); };
+        public int getItemCount() { return allYarns.size(); }
 
         public class AllYarnsLongClickListener implements View.OnLongClickListener {
 
